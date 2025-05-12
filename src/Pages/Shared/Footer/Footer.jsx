@@ -2,12 +2,12 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-900 text-gray-300 py-10 mt-10">
+        <footer className="bg-gray-900 text-gray-300 py-10 ">
             <div className="max-w-7xl mx-auto px-4 grid grid-cols-1  md:grid-cols-4 gap-8">
                 {/* Logo & About */}
                 <div>
                     <div className='flex items-center gap-2'>
-                        <img src="/src/assets/love.png" className='md:h-14 md:w-14 h-10 w-10 object-cover' alt="logo" />
+                        <img src="/src/assets/footer.jpg" className='md:h-14 md:w-14 h-10 w-10 object-cover' alt="logo" />
                     <h2 className="text-2xl font-bold text-white"> Matrimony</h2>
                     </div>
                     <p className="mt-4 text-sm text-gray-400">

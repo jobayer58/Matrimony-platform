@@ -1,0 +1,93 @@
+import React, { useState } from 'react';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+
+const Signup = () => {
+    const [showPassword, setShowPassword] = useState(false);
+
+    return (
+        <div>
+            <div className="min-h-screen bg-gradient-to-br from-pink-100 via-white to-pink-200 flex items-center justify-center px-4 py-10">
+                <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-8">
+                    <h2 className="text-3xl font-bold text-center text-pink-600 mb-6">Create a New Account</h2>
+
+                    <form className="space-y-5">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                            <input
+                                type="text"
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
+                                placeholder="Your full name"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">PhotoURL</label>
+                            <input
+                                type="text"
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
+                                placeholder="Your PhotoURL Link"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                            <input
+                                type="email"
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
+                                placeholder="write Your Email"
+                            />
+                        </div>
+
+                        <div className="relative">
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                placeholder='••••••••'
+                                className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute inset-y-0 right-3 pt-6 flex items-center text-gray-500"
+                            >
+                                {showPassword ? <AiOutlineEye size={20}></AiOutlineEye> : <AiOutlineEyeInvisible size={20}></AiOutlineEyeInvisible>}
+                            </button>
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            className="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-3 rounded-lg shadow-md transition"
+                        >
+                            Register
+                        </button>
+                    </form>
+
+                    {/* Divider */}
+                    <div className="flex items-center my-6">
+                        <div className="flex-grow h-px bg-gray-300"></div>
+                        <span className="mx-3 text-gray-500 font-medium">OR</span>
+                        <div className="flex-grow h-px bg-gray-300"></div>
+                    </div>
+
+                    {/* Google Button */}
+                    <button
+                        className="w-full border border-gray-300 flex items-center justify-center gap-3 py-3 rounded-lg shadow-sm hover:shadow-md transition font-medium text-gray-700"
+                    >
+                        <img
+                            src="https://www.svgrepo.com/show/475656/google-color.svg"
+                            alt="Google"
+                            className="w-5 h-5"
+                        />
+                        Sign up with Google
+                    </button>
+
+                    <p className="text-sm text-center text-gray-600 mt-6">
+                        Already have an account? <a href="/login" className="text-pink-600 font-semibold hover:underline">Login</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Signup;

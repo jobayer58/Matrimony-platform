@@ -39,7 +39,7 @@ const Banner = () => {
             <div className="absolute top-0 left-0 h-full w-full  bg-opacity-50 flex items-center justify-center ">
                 <div className="text-center text-white px-6 ">
                     {/* text-[#c48c46] text-[#66451c] */}
-                    <h1 className="text-4xl md:text-6xl font-extrabold mb-4 text-pink-400 ">
+                    <h1 className="text-4xl md:text-6xl font-extrabold mb-4 text-red-500 ">
                         Find Your Perfect Match
                     </h1>
                     <p className="text-lg md:text-xl mb-6 max-w-2xl mx-auto">
