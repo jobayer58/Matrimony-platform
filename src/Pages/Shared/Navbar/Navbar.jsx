@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router';
+import UseAuth from '../../../Hooks/UseAuth';
 // text-[#c48c46] text-[#66451c]
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const { user, logOut } = UseAuth()
     const path = <>
         <NavLink to='/' className={({ isActive }) =>
             isActive ? " text-pink-700 font-semibold" : "text-pink-400"
@@ -38,11 +40,17 @@ const Navbar = () => {
 
                         {/* Desktop Login/Register */}
                         <div className="hidden md:flex space-x-4">
-                            <Link to='/login'>
-                                <button className="px-4 py-2 border border-pink-400 text-pink-400 rounded hover:bg-pink-700  text-xl">
-                                    Login
-                                </button>
-                            </Link>
+                            {/* <Link to='/login' className="px-4 py-2 border border-pink-400 text-pink-400 rounded hover:bg-pink-700  text-xl">
+                                Login
+                            </Link> */}
+                            {
+                                user && user?.email ?
+                                    <button onClick={logOut} className="px-4 py-2 border border-pink-400 text-pink-400 rounded hover:bg-pink-700  text-xl">LOGOUT</button>
+                                    :
+                                    <Link to='/login' className="px-4 py-2 border border-pink-400 text-pink-400 rounded hover:bg-pink-700  text-xl">
+                                        LOGIN
+                                    </Link>
+                            }
                         </div>
 
                         {/* Mobile menu button */}
@@ -82,9 +90,12 @@ const Navbar = () => {
                     <ul className="md:hidden grid px-4 pt-2 pb-4 space-y-2">
                         {path}
                         <div className="pt-2 space-y-2">
-                            <button className="w-full px-4 py-2 text-indigo-600 border border-indigo-600 rounded hover:bg-indigo-50">
-                                Login
-                            </button>
+                            {
+                                user && user?.email ?
+                                    <button onClick={logOut} className="w-full px-4 py-2 border border-pink-400 text-pink-400 rounded hover:bg-pink-700 text-xl">LOGOUT</button>
+                                    :
+                                    <Link to='login' className="block text-center w-full px-4 py-2 border border-pink-400 text-pink-400 rounded hover:bg-pink-700 text-xl">LOGIN</Link>
+                            }
                         </div>
                     </ul>
                 )}

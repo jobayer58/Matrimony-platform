@@ -1,8 +1,49 @@
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import UseAuth from '../../../Hooks/UseAuth';
+import { Link, useNavigate } from 'react-router';
+import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
 
 const Signup = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const {createUser,updateUserProfile,setUser} = UseAuth()
+    const navigate = useNavigate()
+
+    const onSubmit = data => {
+        console.log(data);
+        createUser(data.email,data.password)
+        .then(result => {
+             const user = result.user
+            setUser(user)
+            updateUserProfile(data.name, data.photoURL)
+            .then(() => {
+                // const userInfo = {
+                //     name: data.name,
+                //     email: data.email,
+
+                // }
+                // axiosPublic.post('/users',userInfo)
+                // .then(res => {
+                //     if (res.data.insertedId) {
+                //         Swal.fire({
+                //             position: 'top-end',
+                //             icon: "success",
+                //             title: 'user create successfully',
+                //             showConfirmButton: false,
+                //             timer: 15000
+                //         })
+                //     }
+                // })
+                reset()
+                navigate('/')
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        })
+    }
 
     return (
         <div>
@@ -10,40 +51,56 @@ const Signup = () => {
                 <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-8">
                     <h2 className="text-3xl font-bold text-center text-pink-600 mb-6">Create a New Account</h2>
 
-                    <form className="space-y-5">
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
                             <input
+                                {...register("name", { required: true, minLength: 5 })}
                                 type="text"
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
                                 placeholder="Your full name"
                             />
+                            {errors.name && <span className='text-red-500'>Must be more the 5 character long</span>}
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">PhotoURL</label>
                             <input
+                                {...register("PhotoURL", { required: true })}
                                 type="text"
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
                                 placeholder="Your PhotoURL Link"
                             />
+                            {errors.name && <span className='text-red-500'>photoURL is required</span>}
                         </div>
 
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
                             <input
+                                {...register("email", { required: true })}
                                 type="email"
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
                                 placeholder="write Your Email"
                             />
+                            {errors.name && <span className='text-red-500'>email is required</span>}
                         </div>
 
                         <div className="relative">
                             <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
                             <input
+                                {...register("password", {
+                                    required: true,
+                                    minLength: 6,
+                                    maxLength: 20,
+                                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
+                                })}
                                 type={showPassword ? "text" : "password"}
                                 placeholder='••••••••'
                                 className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
                             />
+                            {errors.password?.type === 'required' && <p className='text-red-600'>password must be less then 20 character </p>}
+                            {errors.password?.type === 'minLength' && <p className='text-red-600'>password must be 6 character </p>}
+                            {errors.password?.type === 'mexLength' && <p className='text-red-600'>password must be less then 20 character </p>}
+                            {errors.password?.type === 'pattern' && <p className='text-red-600'>password must be one uppercase one lowercase on special number on spacial  character </p>}
                             <button
                                 type="button"
                                 onClick={() => setShowPassword(!showPassword)}
@@ -82,7 +139,9 @@ const Signup = () => {
                     </button>
 
                     <p className="text-sm text-center text-gray-600 mt-6">
-                        Already have an account? <a href="/login" className="text-pink-600 font-semibold hover:underline">Login</a>
+                        Already have an account? <Link to='/login' className="text-pink-600 font-semibold hover:underline">
+                            Login
+                        </Link>
                     </p>
                 </div>
             </div>
