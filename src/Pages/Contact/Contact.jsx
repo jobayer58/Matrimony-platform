@@ -2,8 +2,8 @@ import React from 'react';
 
 const Contact = () => {
     return (
-        <div>
-            <h1>bad</h1>
+        <div className='bg-[#fcfcf4] h-96'>
+            <h1>bangladesh</h1>
         </div>
     );
 };

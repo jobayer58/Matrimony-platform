@@ -3,21 +3,22 @@ import { NavLink } from 'react-router';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    // text-[#36d1e4]
     const path = <>
         <NavLink to='/' className={({ isActive }) =>
-            isActive ? "text-indigo-600 font-semibold" : "text-black"
+            isActive ? "text-[#117683] font-semibold" : "text-[#36d1e4]"
         }>Home</NavLink>
 
         <NavLink to='/matches' className={({ isActive }) =>
-            isActive ? "text-indigo-600 font-semibold" : "text-black"
+            isActive ? "text-[#117683] font-semibold" : "text-[#36d1e4]"
         }>Matches</NavLink>
 
         <NavLink to='/about' className={({ isActive }) =>
-            isActive ? "text-indigo-600 font-semibold" : "text-black"
+            isActive ? "text-[#117683] font-semibold" : "text-[#36d1e4]"
         }>About</NavLink>
 
         <NavLink to='/contact' className={({ isActive }) =>
-            isActive ? "text-indigo-600 font-semibold" : "text-black"
+            isActive ? "text-[#117683] font-semibold" : "text-[#36d1e4]"
         }>Contact</NavLink>
     </>
     return (
@@ -28,7 +29,7 @@ const Navbar = () => {
                         {/* Logo */}
                         <div className="flex justify-center items-center text-2xl font-bold text-indigo-600 gap-1">
                             <img src="/src/assets/love.png" className='md:h-14 md:w-14 h-10 w-10 object-cover' alt="" />
-                            <p>Matrimony</p>
+                            <p className='text-[#36d1e4]'>Matrimony</p>
                         </div>
                         {/* Desktop Menu */}
                         <ul className="hidden md:flex space-x-6 text-xl">
@@ -37,7 +38,7 @@ const Navbar = () => {
 
                         {/* Desktop Login/Register */}
                         <div className="hidden md:flex space-x-4">
-                            <button className="px-4 py-2 border border-indigo-600 text-indigo-600 rounded hover:bg-indigo-50 transition">
+                            <button className="px-4 py-2 border border-[#36d1e4] text-[#36d1e4] rounded hover:bg-indigo-50 transition">
                                 Login
                             </button>
                             
