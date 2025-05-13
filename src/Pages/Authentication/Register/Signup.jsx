@@ -1,52 +1,83 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import UseAuth from '../../../Hooks/UseAuth';
 import { Link, useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Signup = () => {
     const [showPassword, setShowPassword] = useState(false);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const {createUser,updateUserProfile,setUser} = UseAuth()
+    const { createUser, updateUserProfile, setUser, signinWithGoogle } = UseAuth()
     const navigate = useNavigate()
 
     const onSubmit = data => {
         console.log(data);
-        createUser(data.email,data.password)
-        .then(result => {
-             const user = result.user
-            setUser(user)
-            updateUserProfile(data.name, data.photoURL)
-            .then(() => {
-                // const userInfo = {
-                //     name: data.name,
-                //     email: data.email,
+        createUser(data.email, data.password)
+            .then(result => {
+                const user = result.user
+                setUser(user)
+                updateUserProfile(data.name, data.photoURL)
+                    .then(() => {
+                        // const userInfo = {
+                        //     name: data.name,
+                        //     email: data.email,
 
-                // }
-                // axiosPublic.post('/users',userInfo)
-                // .then(res => {
-                //     if (res.data.insertedId) {
-                //         Swal.fire({
-                //             position: 'top-end',
-                //             icon: "success",
-                //             title: 'user create successfully',
-                //             showConfirmButton: false,
-                //             timer: 15000
-                //         })
-                //     }
-                // })
-                reset()
-                navigate('/')
+                        // }
+                        // axiosPublic.post('/users',userInfo)
+                        // .then(res => {
+                        //     if (res.data.insertedId) {
+                        // Swal.fire({
+                        //     position: 'top-end',
+                        //     icon: "success",
+                        //     title: 'user create successfully',
+                        //     showConfirmButton: false,
+                        //     timer: 15000
+                        // })
+                        //     }
+                        // })
+                        // reset()
+                        console.log("Photo URL:", data.photoURL);
+                        navigate('/')
+                    })
+                    .catch(error => {
+                        toast.warn(error.message)
+                    })
+            })
+    }
+
+    const handleGoogleSignin = () => {
+        signinWithGoogle()
+            .then(result => {
+                result.user
+                Swal.fire({
+                    title: "you are login successfully",
+                    showClass: {
+                        popup: `
+                          animate__animated
+                          animate__fadeInUp
+                          animate__faster
+                        `
+                    },
+                    hideClass: {
+                        popup: `
+                          animate__animated
+                          animate__fadeOutDown
+                          animate__faster
+                        `
+                    }
+                });
+                navigate(location?.state ? location.state : '/')
             })
             .catch(error => {
-                console.log(error);
+                error.message
             })
-        })
     }
 
     return (
         <div>
+            <ToastContainer></ToastContainer>
             <div className="min-h-screen bg-gradient-to-br from-pink-100 via-white to-pink-200 flex items-center justify-center px-4 py-10">
                 <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-8">
                     <h2 className="text-3xl font-bold text-center text-pink-600 mb-6">Create a New Account</h2>
@@ -65,7 +96,7 @@ const Signup = () => {
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">PhotoURL</label>
                             <input
-                                {...register("PhotoURL", { required: true })}
+                                {...register("photoURL", { required: true })}
                                 type="text"
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
                                 placeholder="Your PhotoURL Link"
@@ -127,7 +158,7 @@ const Signup = () => {
                     </div>
 
                     {/* Google Button */}
-                    <button
+                    <button onClick={handleGoogleSignin}
                         className="w-full border border-gray-300 flex items-center justify-center gap-3 py-3 rounded-lg shadow-sm hover:shadow-md transition font-medium text-gray-700"
                     >
                         <img

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router';
 import UseAuth from '../../../Hooks/UseAuth';
+import { Tooltip } from 'react-tooltip';
 // text-[#c48c46] text-[#66451c]
 
 const Navbar = () => {
@@ -22,6 +23,13 @@ const Navbar = () => {
         <NavLink to='/contact' className={({ isActive }) =>
             isActive ? "text-pink-700 font-semibold" : "text-pink-400"
         }>Contact</NavLink>
+        {
+            user?.email && 
+            <NavLink to='/dashboard' className={({ isActive }) =>
+                isActive ? "text-pink-700 font-semibold" : "text-pink-400"
+            }>Dashboard</NavLink>
+
+        }
     </>
     return (
         <div>
@@ -29,25 +37,32 @@ const Navbar = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-20">
                         {/* Logo */}
-                        <div className="flex justify-center items-center text-2xl font-bold text-indigo-600 gap-1">
-                            <img src="/src/assets/logo.jpg" className='md:h-14 md:w-14 h-10 w-10 object-cover' alt="" />
-                            <p className='text-pink-400'>Matrimony</p>
+                        <div className="flex justify-center items-center  text-indigo-600 gap-1">
+                            <img src="/src/assets/logo.jpg" className='lg:h-14 lg:w-14 h-10 w-10 object-cover' alt="" />
+                            <p className='text-pink-400 lg:text-3xl font-bold md:text-[18px] text-2xl' >Matrimony</p>
                         </div>
                         {/* Desktop Menu */}
-                        <ul className="hidden md:flex space-x-6 text-xl">
+                        <ul className="hidden md:flex space-x-6 lg:text-xl">
                             {path}
                         </ul>
 
                         {/* Desktop Login/Register */}
                         <div className="hidden md:flex space-x-4">
-                            {/* <Link to='/login' className="px-4 py-2 border border-pink-400 text-pink-400 rounded hover:bg-pink-700  text-xl">
-                                Login
-                            </Link> */}
+                            {
+                                user?.email && <div><img data-tooltip-id="logo-img-tooltip" className="lg:w-14 lg:h-14 w-12 h-12 rounded-full object-cover" src={user?.photoURL} alt="" />
+                                    <Tooltip id="logo-img-tooltip" place="left" effect="solid">
+                                        {
+                                            user?.displayName
+                                        }
+                                    </Tooltip>
+                                </div>
+
+                            }
                             {
                                 user && user?.email ?
-                                    <button onClick={logOut} className="px-4 py-2 border border-pink-400 text-pink-400 rounded hover:bg-pink-700  text-xl">LOGOUT</button>
+                                    <button onClick={logOut} className="lg:px-4 lg:py-2 md:px-2 md:py-1 border border-pink-400 text-pink-400 rounded hover:bg-pink-700  lg:text-xl">LOGOUT</button>
                                     :
-                                    <Link to='/login' className="px-4 py-2 border border-pink-400 text-pink-400 rounded hover:bg-pink-700  text-xl">
+                                    <Link to='/login' className="px-4 py-2  border border-pink-400 text-pink-400 rounded hover:bg-pink-700  lg:text-xl">
                                         LOGIN
                                     </Link>
                             }

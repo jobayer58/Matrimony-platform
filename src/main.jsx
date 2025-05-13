@@ -12,20 +12,28 @@ import Contact from './Pages/Contact/Contact.jsx';
 import Login from './Pages/Authentication/Login/Login.jsx';
 import Signup from './Pages/Authentication/Register/SignUp.jsx';
 import AuthProvider from './Providers/AuthProvider.jsx';
+import Dashboard from './Layout/Dashboard.jsx';
+import PrivateRoute from './Routes/PrivateRoute.jsx';
+import ErrorPage from './Pages/ErrorPage/ErrorPage.jsx';
+import Matches from './Pages/Matches/Matches.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
-    errorElement: <p>error</p>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: '/',
         element: <Home></Home>
       },
       {
+        path: '/matches',
+        element: <Matches></Matches>
+      },
+      {
         path: 'contact',
-        element: <Contact></Contact>
+        element: <PrivateRoute><Contact></Contact></PrivateRoute>
       },
       {
         path: '/login',
@@ -37,6 +45,10 @@ const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path: 'dashboard',
+    element: <Dashboard></Dashboard>
+  }
 ]);
 
 createRoot(document.getElementById('root')).render(

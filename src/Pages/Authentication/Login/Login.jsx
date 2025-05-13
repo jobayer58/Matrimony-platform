@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import UseAuth from '../../../Hooks/UseAuth';
 // import { useLocation, useNavigate } from 'react-router';
@@ -8,12 +8,9 @@ import { toast, ToastContainer, Zoom } from 'react-toastify';
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const { signIn } = UseAuth()
+    const { signIn,signinWithGoogle,setUser } = UseAuth()
     const navigate = useNavigate()
     const location = useLocation()
-
-    const from = location.state?.from?.pathname || '/'
-
 
     const handleLogin = e => {
         e.preventDefault()
@@ -24,7 +21,7 @@ const Login = () => {
         signIn(email, password)
             .then(result => {
                 const user = result.user
-                console.log(user);
+                setUser(user)
                 Swal.fire({
                     title: "you are login successfully",
                     showClass: {
@@ -42,7 +39,7 @@ const Login = () => {
                   `
                     }
                 });
-                navigate(from, { replace: true })
+                navigate(location?.state ? location.state : '/')
             })
             .catch(error => {
                 if (error) {
@@ -52,6 +49,34 @@ const Login = () => {
                         transition: Zoom,
                     });
                 }
+            })
+    }
+
+    const handleGoogleSignin = () => {
+        signinWithGoogle()
+            .then(result => {
+                result.user
+                Swal.fire({
+                    title: "you are login successfully",
+                    showClass: {
+                        popup: `
+                    animate__animated
+                    animate__fadeInUp
+                    animate__faster
+                  `
+                    },
+                    hideClass: {
+                        popup: `
+                    animate__animated
+                    animate__fadeOutDown
+                    animate__faster
+                  `
+                    }
+                });
+                navigate(location?.state ? location.state : '/')
+            })
+            .catch(error => {
+                toast.warn(error.message)
             })
     }
     return (
@@ -105,7 +130,7 @@ const Login = () => {
                     </div>
 
                     {/* Google Button */}
-                    <button
+                    <button onClick={handleGoogleSignin}
                         className="w-full border border-gray-300 flex items-center justify-center gap-3 py-3 rounded-lg shadow-sm hover:shadow-md transition font-medium text-gray-700"
                     >
                         <img
