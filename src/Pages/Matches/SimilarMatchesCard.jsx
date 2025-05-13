@@ -2,7 +2,9 @@ import React from 'react';
 import { FaHeart } from 'react-icons/fa';
 import { Link } from 'react-router';
 
-const MatchesCard = ({ bio }) => {
+
+const SimilarMatchesCard = ({ bio }) => {
+
     const { profileImage, biodataNo, biodataType, occupation, permanentDivision, age } = bio
     return (
         <div className="relative bg-white rounded-xl hover:shadow-lg transition-all duration-300 border-pink-400 border overflow-hidden group">
@@ -55,4 +57,4 @@ const MatchesCard = ({ bio }) => {
     );
 };
 
-export default MatchesCard;
+export default SimilarMatchesCard;

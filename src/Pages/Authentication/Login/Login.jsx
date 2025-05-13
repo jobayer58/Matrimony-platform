@@ -5,12 +5,16 @@ import UseAuth from '../../../Hooks/UseAuth';
 import Swal from 'sweetalert2';
 import { useLocation, useNavigate } from 'react-router';
 import { toast, ToastContainer, Zoom } from 'react-toastify';
+import PinkLoader from '../../Shared/PinkLoader';
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const { signIn,signinWithGoogle,setUser } = UseAuth()
+    const { signIn,signinWithGoogle,setUser,loading} = UseAuth()
     const navigate = useNavigate()
     const location = useLocation()
+    if (loading) {
+        return <PinkLoader></PinkLoader>
+    }
 
     const handleLogin = e => {
         e.preventDefault()

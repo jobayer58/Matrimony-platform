@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import MatchesCard from './MatchesCard';
+import UseAuth from '../../Hooks/UseAuth';
+import { PulseLoader } from 'react-spinners';
+import PinkLoader from '../Shared/PinkLoader';
 
 const Matches = () => {
     const [bioData, setBioData] = useState([]);
+    const { loading } = UseAuth()
     const [filters, setFilters] = useState({
         type: '',
         division: '',
@@ -34,6 +38,10 @@ const Matches = () => {
 
         return matchType && matchDivision && matchMinAge && matchMaxAge;
     });
+
+    if (loading) {
+        return <PinkLoader></PinkLoader>
+    }
 
     return (
         <div className='bg-gradient-to-r from-pink-200 via-purple-200 to-indigo-200'>

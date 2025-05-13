@@ -16,6 +16,7 @@ import Dashboard from './Layout/Dashboard.jsx';
 import PrivateRoute from './Routes/PrivateRoute.jsx';
 import ErrorPage from './Pages/ErrorPage/ErrorPage.jsx';
 import Matches from './Pages/Matches/Matches.jsx';
+import MatchesDetails from './Pages/Matches/MatchesDetails.jsx';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,11 @@ const router = createBrowserRouter([
       {
         path: '/matches',
         element: <Matches></Matches>
+      },
+      {
+        path: '/matches/:id',
+        element: <PrivateRoute><MatchesDetails></MatchesDetails></PrivateRoute>,
+        loader: ({params}) => fetch(`http://localhost:5000/matchesBio/${params.id}`)
       },
       {
         path: 'contact',

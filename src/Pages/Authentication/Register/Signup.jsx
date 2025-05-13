@@ -5,12 +5,16 @@ import { Link, useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { toast, ToastContainer } from 'react-toastify';
+import PinkLoader from '../../Shared/PinkLoader';
 
 const Signup = () => {
     const [showPassword, setShowPassword] = useState(false);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const { createUser, updateUserProfile, setUser, signinWithGoogle } = UseAuth()
+    const { createUser, updateUserProfile, setUser, signinWithGoogle ,loading} = UseAuth()
     const navigate = useNavigate()
+    if (loading) {
+        return <PinkLoader></PinkLoader>
+    }
 
     const onSubmit = data => {
         console.log(data);
