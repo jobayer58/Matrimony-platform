@@ -28,26 +28,37 @@ const MatchesDetails = () => {
                 name,
                 profileImage,
                 permanentDivision,
-                occupation
-            }
+                occupation,
+                biodataNo
+            };
+    
             axiosSecure.post('/favorite', bioItem)
                 .then(res => {
-                    console.log(res.data);
                     if (res.data.insertedId) {
-                        toast.success('This Profile added your Favorite List!', {
+                        toast.success('This Profile added to your Favorite List!', {
                             position: "top-center",
                             closeOnClick: true,
                             transition: Zoom,
                         });
-                        refetch()
+                        refetch();
+                    } else if (res.data.message === 'exists') {
+                        toast.warning('This Profile is already added your Favorite List!', {
+                            position: "top-center",
+                            closeOnClick: true,
+                            transition: Zoom,
+                        });
                     }
                 });
-            // 
         } else {
-            toast.warn('please login to add to the favorite')
-            navigate('/login')
+            toast.warn('Please login to add to the favorite', {
+                position: "top-center",
+                transition: Zoom,
+            });
+            navigate('/login');
         }
-    }
+    };
+    
+    
 
     useEffect(() => {
         if (!bioData) return;
