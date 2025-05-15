@@ -1,25 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, NavLink, Outlet, useLocation, useNavigate } from 'react-router';
 import UseAuth from '../Hooks/UseAuth';
-import {
-    LayoutDashboard,
-    Users,
-    Crown,
-    Phone,
-    Pencil,
-    Eye,
-    Heart,
-    LogOut,
-    Home,
-    CheckCheck,
-    Menu
-} from 'lucide-react';
+import { LayoutDashboard, Users, Crown, Phone, Pencil, Eye, Heart, LogOut, Home, CheckCheck, Menu } from 'lucide-react';
 import Swal from 'sweetalert2';
 
 const Dashboard = () => {
     const location = useLocation();
     const { user, logOut } = UseAuth();
     const isAdmin = user?.role === 'admin';
+    // const isAdmin = true
     const navigate = useNavigate();
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -46,9 +35,9 @@ const Dashboard = () => {
 
     const closeSidebar = () => {
         if (window.innerWidth < 768) {
-          setSidebarOpen(false);
+            setSidebarOpen(false);
         }
-      };
+    };
 
     const SidebarLinks = () => (
         <>
@@ -58,13 +47,13 @@ const Dashboard = () => {
 
             {isAdmin ? (
                 <>
-                    <NavLink to="/dashboard/admin" className={navLinkStyle}  onClick={closeSidebar}>
+                    <NavLink to="/dashboard/admin" className={navLinkStyle} onClick={closeSidebar}>
                         <LayoutDashboard className="w-5 h-5" /> Admin Dashboard
                     </NavLink>
-                    <NavLink to="/dashboard/manage" className={navLinkStyle}  onClick={closeSidebar}>
+                    <NavLink to="/dashboard/manage" className={navLinkStyle} onClick={closeSidebar}>
                         <Users className="w-5 h-5" /> Manage Users
                     </NavLink>
-                    <NavLink to="/dashboard/approvedPremium" className={navLinkStyle}> onClick={closeSidebar}
+                    <NavLink to="/dashboard/approvedPremium" className={navLinkStyle} onClick={closeSidebar}> 
                         <Crown className="w-5 h-5" /> Approved Premium
                     </NavLink>
                     <NavLink to="/dashboard/approvedContactRequest" className={navLinkStyle} onClick={closeSidebar}>

@@ -20,6 +20,14 @@ import MatchesDetails from './Pages/Matches/MatchesDetails.jsx';
 import EditBioData from './Pages/DashboardPage/DashboardUser/EditBioData.jsx';
 import AllUser from './Pages/DashboardPage/DashboardAdmin/AllUser.jsx';
 
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import FavoriteBioData from './Pages/DashboardPage/DashboardUser/FavoriteBioData.jsx';
+
+const queryClient = new QueryClient()
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -37,7 +45,7 @@ const router = createBrowserRouter([
       {
         path: '/matches/:id',
         element: <PrivateRoute><MatchesDetails></MatchesDetails></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/matchesBio/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/matchesBio/${params.id}`)
       },
       {
         path: 'contact',
@@ -56,7 +64,7 @@ const router = createBrowserRouter([
   {
     path: 'dashboard',
     element: <Dashboard></Dashboard>,
-    children:[
+    children: [
       // user Routes
       {
         path: '/dashboard/editBioData',
@@ -72,7 +80,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard/favorites',
-        element: <p>fovirite</p>
+        element: <FavoriteBioData></FavoriteBioData>
       },
       {
         path: '/dashboard/gotMarried',
@@ -106,8 +114,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </QueryClientProvider>
   </StrictMode>,
 )

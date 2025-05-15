@@ -9,10 +9,10 @@ const SimilarMatchesCard = ({ bio }) => {
     return (
         <div className="relative bg-white rounded-xl hover:shadow-2xl transition-all duration-300 border-pink-400 border overflow-hidden group">
 
-            {/* Favorite Button */}
+            {/* Favorite Button
             <button className="absolute top-3 right-3 bg-white border p-2 rounded-full shadow hover:text-pink-600 transition">
                 <FaHeart className=" text-lg hover:text-red-600" />
-            </button>
+            </button> */}
 
             {/* Profile Section */}
             <div className="flex flex-col items-center p-5">
