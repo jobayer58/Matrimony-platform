@@ -83,7 +83,7 @@ const FavoriteBioData = () => {
                                 )) : (
                                     <tr>
                                         <td colSpan="7" className="text-center text-gray-500 py-6">
-                                            No favourites found.
+                                            No favorites found.
                                         </td>
                                     </tr>
                                 )

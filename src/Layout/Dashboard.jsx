@@ -3,12 +3,13 @@ import { Navigate, NavLink, Outlet, useLocation, useNavigate } from 'react-route
 import UseAuth from '../Hooks/UseAuth';
 import { LayoutDashboard, Users, Crown, Phone, Pencil, Eye, Heart, LogOut, Home, CheckCheck, Menu } from 'lucide-react';
 import Swal from 'sweetalert2';
+import UseAdmin from '../Hooks/UseAdmin';
 
 const Dashboard = () => {
     const location = useLocation();
-    const { user, logOut } = UseAuth();
-    const isAdmin = user?.role === 'admin';
-    // const isAdmin = true
+    const {  logOut } = UseAuth();
+    // const isAdmin = user?.role === 'admin';
+    const [isAdmin] = UseAdmin()
     const navigate = useNavigate();
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -53,10 +54,10 @@ const Dashboard = () => {
                     <NavLink to="/dashboard/manage" className={navLinkStyle} onClick={closeSidebar}>
                         <Users className="w-5 h-5" /> Manage Users
                     </NavLink>
-                    <NavLink to="/dashboard/approvedPremium" className={navLinkStyle} onClick={closeSidebar}> 
+                    <NavLink to="/dashboard/premium" className={navLinkStyle} onClick={closeSidebar}> 
                         <Crown className="w-5 h-5" /> Approved Premium
                     </NavLink>
-                    <NavLink to="/dashboard/approvedContactRequest" className={navLinkStyle} onClick={closeSidebar}>
+                    <NavLink to="/dashboard/contactRequest" className={navLinkStyle} onClick={closeSidebar}>
                         <Phone className="w-5 h-5" /> Approved Contact Requests
                     </NavLink>
                     <NavLink to="/dashboard/successStory" className={navLinkStyle} onClick={closeSidebar}>
