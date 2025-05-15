@@ -6,8 +6,10 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { toast, ToastContainer } from 'react-toastify';
 import PinkLoader from '../../Shared/PinkLoader';
+import UseAxiosSecure from '../../../Hooks/UseAxiosSecure';
 
 const Signup = () => {
+    const axiosSecure = UseAxiosSecure()
     const [showPassword, setShowPassword] = useState(false);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const { createUser, updateUserProfile, setUser, signinWithGoogle ,loading} = UseAuth()
@@ -24,24 +26,24 @@ const Signup = () => {
                 setUser(user)
                 updateUserProfile(data.name, data.photoURL)
                     .then(() => {
-                        // const userInfo = {
-                        //     name: data.name,
-                        //     email: data.email,
+                        const userInfo = {
+                            name: data.name,
+                            email: data.email,
 
-                        // }
-                        // axiosPublic.post('/users',userInfo)
-                        // .then(res => {
-                        //     if (res.data.insertedId) {
-                        // Swal.fire({
-                        //     position: 'top-end',
-                        //     icon: "success",
-                        //     title: 'user create successfully',
-                        //     showConfirmButton: false,
-                        //     timer: 15000
-                        // })
-                        //     }
-                        // })
-                        // reset()
+                        }
+                        axiosSecure.post('/users',userInfo)
+                        .then(res => {
+                            if (res.data.insertedId) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: "success",
+                            title: 'user create successfully',
+                            showConfirmButton: false,
+                            timer: 10000
+                        })
+                            }
+                        })
+                        reset()
                         console.log("Photo URL:", data.photoURL);
                         navigate('/')
                     })

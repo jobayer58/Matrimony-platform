@@ -7,7 +7,7 @@ const SimilarMatchesCard = ({ bio }) => {
 
     const { profileImage, biodataNo, biodataType, occupation, permanentDivision, age } = bio
     return (
-        <div className="relative bg-white rounded-xl hover:shadow-lg transition-all duration-300 border-pink-400 border overflow-hidden group">
+        <div className="relative bg-white rounded-xl hover:shadow-2xl transition-all duration-300 border-pink-400 border overflow-hidden group">
 
             {/* Favorite Button */}
             <button className="absolute top-3 right-3 bg-white border p-2 rounded-full shadow hover:text-pink-600 transition">

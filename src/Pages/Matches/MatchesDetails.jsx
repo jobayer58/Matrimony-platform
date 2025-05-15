@@ -29,12 +29,12 @@ const MatchesDetails = () => {
                 const timer = setTimeout(() => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 }, 100);
-                
+
                 return () => clearTimeout(timer);
             });
     }, [biodata]);
 
-    
+
 
     const isPremium = user?.role === 'premium';
     if (loading) {
@@ -43,10 +43,10 @@ const MatchesDetails = () => {
 
     return (
         <div className='bg-gradient-to-r from-pink-200 via-purple-200 to-indigo-200 py-10'>
-            <div className="max-w-[1000px] mx-auto p-6 bg-white shadow-md rounded-md ">
+            <div className="max-w-[1000px] mx-auto p-6 bg-gradient-to-br from-pink-100 via-white to-pink-200  shadow-md rounded-md ">
                 <h2 className="text-2xl font-bold mb-4">Biodata ID: {biodataNo}</h2>
 
-                <div className="flex flex-col md:flex-row gap-6">
+                <div className="flex flex-col md:flex-row gap-6 ">
                     <img src={profileImage} alt="Profile" className="w-60 h-60 object-cover rounded-lg" />
 
                     <div className="w-full space-y-6">
@@ -84,9 +84,9 @@ const MatchesDetails = () => {
                         {/* Action Buttons (No function attached) */}
                         <div className="flex flex-col sm:flex-row gap-4 mt-4">
                             <button
-                                className="bg-pink-500 hover:bg-pink-600 text-white px-5 py-2 rounded-md shadow transition"
+                                className="bg-pink-500 hover:bg-pink-600  text-white px-5 py-2 rounded-md shadow transition"
                             >
-                                ❤️ Add to Favorites
+                                Add to Favorites
                             </button>
                             <button
                                 className="bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-2 rounded-md shadow transition"
