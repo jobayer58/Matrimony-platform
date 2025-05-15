@@ -6,15 +6,15 @@ import Swal from 'sweetalert2';
 import { useLocation, useNavigate } from 'react-router';
 import { toast, ToastContainer, Zoom } from 'react-toastify';
 import PinkLoader from '../../Shared/PinkLoader';
+import UseAxiosSecure from '../../../Hooks/UseAxiosSecure';
 
 const Login = () => {
+    const axiosSecure = UseAxiosSecure()
     const [showPassword, setShowPassword] = useState(false);
-    const { signIn,signinWithGoogle,setUser,loading} = UseAuth()
+    const { signIn,signinWithGoogle,setUser} = UseAuth()
     const navigate = useNavigate()
     const location = useLocation()
-    if (loading) {
-        return <PinkLoader></PinkLoader>
-    }
+   
 
     const handleLogin = e => {
         e.preventDefault()
@@ -57,32 +57,35 @@ const Login = () => {
     }
 
     const handleGoogleSignin = () => {
-        signinWithGoogle()
-            .then(result => {
-                result.user
-                Swal.fire({
-                    title: "you are login successfully",
-                    showClass: {
-                        popup: `
-                    animate__animated
-                    animate__fadeInUp
-                    animate__faster
-                  `
-                    },
-                    hideClass: {
-                        popup: `
-                    animate__animated
-                    animate__fadeOutDown
-                    animate__faster
-                  `
+            signinWithGoogle()
+                .then(result => {
+                    const userInfo = {
+                        email: result.user?.email,
+                        name: result.user?.displayName
                     }
-                });
-                navigate(location?.state ? location.state : '/')
-            })
-            .catch(error => {
-                toast.warn(error.message)
-            })
-    }
+                    axiosSecure.post('/users', userInfo)
+                        .then(res => {
+                            console.log(res.data);
+    
+                        })
+                    Swal.fire({
+                        title: "You are Login Successfully",
+                        animation: {
+                            popup: 'animate__animated animate__fadeInUp',
+                            hide: 'animate__animated animate__fadeOutDown'
+                        }
+                    });
+                    navigate(location?.state ? location.state : '/')
+                })
+                .catch(error => {
+                    error.message
+                    Swal.fire({
+                        title: "Login failed",
+                        text: error.message ,
+                        icon: "error"
+                    });
+                })
+        }
     return (
         <div>
             <ToastContainer></ToastContainer>

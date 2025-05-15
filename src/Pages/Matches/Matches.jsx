@@ -44,11 +44,11 @@ const Matches = () => {
     }
 
     return (
-        <div className='bg-gradient-to-r from-pink-200 via-purple-200 to-indigo-200'>
-            <div className="max-w-[1300px]  mx-auto p-4 grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className='bg-gradient-to-r from-pink-200 via-purple-200 to-indigo-200 '>
+            <div className="max-w-[1300px]  mx-auto p-4 grid grid-cols-1 md:grid-cols-4 gap-6 ">
 
                 {/* Filter Sidebar */}
-                <div className="md:col-span-1 bg-white p-4 shadow rounded border-none">
+                <div className="md:col-span-1 bg-white p-4 shadow rounded border-none ">
                     <h2 className="text-lg font-semibold mb-4">Filter Options</h2>
 
                     <div className="space-y-4">

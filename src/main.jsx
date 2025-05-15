@@ -17,6 +17,8 @@ import PrivateRoute from './Routes/PrivateRoute.jsx';
 import ErrorPage from './Pages/ErrorPage/ErrorPage.jsx';
 import Matches from './Pages/Matches/Matches.jsx';
 import MatchesDetails from './Pages/Matches/MatchesDetails.jsx';
+import EditBioData from './Pages/DashboardPage/DashboardUser/EditBioData.jsx';
+import AllUser from './Pages/DashboardPage/DashboardAdmin/AllUser.jsx';
 
 const router = createBrowserRouter([
   {
@@ -53,7 +55,52 @@ const router = createBrowserRouter([
   },
   {
     path: 'dashboard',
-    element: <Dashboard></Dashboard>
+    element: <Dashboard></Dashboard>,
+    children:[
+      // user Routes
+      {
+        path: '/dashboard/editBioData',
+        element: <EditBioData></EditBioData>
+      },
+      {
+        path: '/dashboard/viewBioData',
+        element: <p>view</p>
+      },
+      {
+        path: '/dashboard/contactRequest',
+        element: <p>contact</p>
+      },
+      {
+        path: '/dashboard/favorites',
+        element: <p>fovirite</p>
+      },
+      {
+        path: '/dashboard/gotMarried',
+        element: <p>gotMarried</p>
+      },
+      // admin Routes
+
+      {
+        path: '/dashboard/admin',
+        element: <p>admin</p>
+      },
+      {
+        path: '/dashboard/manage',
+        element: <AllUser></AllUser>
+      },
+      {
+        path: '/dashboard/premium',
+        element: <p>Premium</p>
+      },
+      {
+        path: '/dashboard/contactRequest',
+        element: <p>contactRequest</p>
+      },
+      {
+        path: '/dashboard/successStory',
+        element: <p>successStory</p>
+      },
+    ]
   }
 ]);
 

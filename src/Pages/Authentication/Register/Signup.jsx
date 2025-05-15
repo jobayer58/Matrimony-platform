@@ -12,7 +12,7 @@ const Signup = () => {
     const axiosSecure = UseAxiosSecure()
     const [showPassword, setShowPassword] = useState(false);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const { createUser, updateUserProfile, setUser, signinWithGoogle ,loading} = UseAuth()
+    const { createUser, updateUserProfile, setUser, signinWithGoogle, loading } = UseAuth()
     const navigate = useNavigate()
     if (loading) {
         return <PinkLoader></PinkLoader>
@@ -31,18 +31,18 @@ const Signup = () => {
                             email: data.email,
 
                         }
-                        axiosSecure.post('/users',userInfo)
-                        .then(res => {
-                            if (res.data.insertedId) {
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: "success",
-                            title: 'user create successfully',
-                            showConfirmButton: false,
-                            timer: 10000
-                        })
-                            }
-                        })
+                        axiosSecure.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: "success",
+                                        title: 'user create successfully',
+                                        showConfirmButton: false,
+                                        timer: 10000
+                                    })
+                                }
+                            })
                         reset()
                         console.log("Photo URL:", data.photoURL);
                         navigate('/')
@@ -56,28 +56,31 @@ const Signup = () => {
     const handleGoogleSignin = () => {
         signinWithGoogle()
             .then(result => {
-                result.user
+                const userInfo = {
+                    email: result.user?.email,
+                    name: result.user?.displayName
+                }
+                axiosSecure.post('/users', userInfo)
+                    .then(res => {
+                        console.log(res.data);
+
+                    })
                 Swal.fire({
-                    title: "you are login successfully",
-                    showClass: {
-                        popup: `
-                          animate__animated
-                          animate__fadeInUp
-                          animate__faster
-                        `
-                    },
-                    hideClass: {
-                        popup: `
-                          animate__animated
-                          animate__fadeOutDown
-                          animate__faster
-                        `
+                    title: "You are Login Successfully",
+                    animation: {
+                        popup: 'animate__animated animate__fadeInUp',
+                        hide: 'animate__animated animate__fadeOutDown'
                     }
                 });
                 navigate(location?.state ? location.state : '/')
             })
             .catch(error => {
                 error.message
+                Swal.fire({
+                    title: "Login failed",
+                    text: error.message ,
+                    icon: "error"
+                });
             })
     }
 

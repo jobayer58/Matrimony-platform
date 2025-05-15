@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router';
+import { Link, NavLink, useNavigate } from 'react-router';
 import UseAuth from '../../../Hooks/UseAuth';
 import { Tooltip } from 'react-tooltip';
+import Swal from 'sweetalert2';
 // text-[#c48c46] text-[#66451c]
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { user, logOut } = UseAuth()
+    const navigate = useNavigate()
     const path = <>
         <NavLink to='/' className={({ isActive }) =>
             isActive ? " text-pink-700 font-semibold" : "text-pink-400"
@@ -31,6 +33,18 @@ const Navbar = () => {
 
         }
     </>
+
+     const handleLogOut = () => {
+            logOut()
+            Swal.fire({
+                title: "You are LogOut Successfully",
+                animation: {
+                    popup: 'animate__animated animate__fadeInUp',
+                    hide: 'animate__animated animate__fadeOutDown'
+                }
+            });
+            navigate('/')
+        }
     return (
         <div>
             <nav className="bg-white shadow-md sticky top-0 z-50">
@@ -60,7 +74,7 @@ const Navbar = () => {
                             }
                             {
                                 user && user?.email ?
-                                    <button onClick={logOut} className="lg:px-4 lg:py-2 md:px-2 md:py-1 border border-pink-400 text-pink-400 rounded hover:bg-pink-700  lg:text-xl">LOGOUT</button>
+                                    <button onClick={handleLogOut} className="lg:px-4 lg:py-2 md:px-2 md:py-1 border border-pink-400 text-pink-400 rounded hover:bg-pink-700  lg:text-xl">LOGOUT</button>
                                     :
                                     <Link to='/login' className="px-4 py-2  border border-pink-400 text-pink-400 rounded hover:bg-pink-700  lg:text-xl">
                                         LOGIN
@@ -107,7 +121,7 @@ const Navbar = () => {
                         <div className="pt-2 space-y-2">
                             {
                                 user && user?.email ?
-                                    <button onClick={logOut} className="w-full px-4 py-2 border border-pink-400 text-pink-400 rounded hover:bg-pink-700 text-xl">LOGOUT</button>
+                                    <button onClick={handleLogOut} className="w-full px-4 py-2 border border-pink-400 text-pink-400 rounded hover:bg-pink-700 text-xl">LOGOUT</button>
                                     :
                                     <Link to='login' className="block text-center w-full px-4 py-2 border border-pink-400 text-pink-400 rounded hover:bg-pink-700 text-xl">LOGIN</Link>
                             }
