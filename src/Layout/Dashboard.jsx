@@ -67,7 +67,7 @@ const Dashboard = () => {
             ) : (
                 <>
                     <NavLink to="/dashboard/editBioData" className={navLinkStyle} onClick={closeSidebar}>
-                        <Pencil className="w-5 h-5" /> Edit BioData
+                        <Pencil className="w-5 h-5 " /> Edit BioData
                     </NavLink>
                     <NavLink to="/dashboard/viewBioData" className={navLinkStyle} onClick={closeSidebar}>
                         <Eye className="w-5 h-5" /> View BioData

@@ -56,7 +56,8 @@ const EditBioData = () => {
                     showConfirmButton: false,
                     timer: 1500
                   });
-            }
+                  
+                }
         }
 
         
@@ -75,7 +76,7 @@ const EditBioData = () => {
                                 {/* BioData Type */}
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-1">BioData Type</label>
-                                    <select {...register("biodataType", { required: true })} required className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-400">
+                                    <select {...register("biodataType", { required: true })}  className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-400">
                                         <option value="">Select Type</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
@@ -87,7 +88,7 @@ const EditBioData = () => {
                                     <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
                                     <input
                                         type="text"
-                                        required
+                                        
                                         {...register("name", { required: true })}
                                         className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
                                         placeholder="Full name"
@@ -153,6 +154,8 @@ const EditBioData = () => {
                                         <option>55kg - 60kg</option>
                                         <option>60kg - 65kg</option>
                                         <option>65kg - 70kg</option>
+                                        <option>70kg - 75kg</option>
+                                        <option>75kg - 80kg</option>
                                     </select>
                                 </div>
 
@@ -306,6 +309,7 @@ const EditBioData = () => {
                                         <option>55kg - 60kg</option>
                                         <option>60kg - 65kg</option>
                                         <option>65kg - 70kg</option>
+                                        <option>70kg - 75kg</option>
                                     </select>
                                 </div>
 
@@ -325,7 +329,7 @@ const EditBioData = () => {
                             </div>
                         </div>
 
-                        Submit button
+                        {/* Submit button */}
                         <div className="mt-8 text-center">
                             <button
                                 type="submit"

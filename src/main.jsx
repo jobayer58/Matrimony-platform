@@ -25,6 +25,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import FavoriteBioData from './Pages/DashboardPage/DashboardUser/FavoriteBioData.jsx';
+import ViewBioData from './Pages/DashboardPage/DashboardUser/ViewBioData.jsx';
 
 const queryClient = new QueryClient()
 
@@ -72,7 +73,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard/viewBioData',
-        element: <p>view</p>
+        element: <ViewBioData></ViewBioData>
       },
       {
         path: '/dashboard/contactRequest',
