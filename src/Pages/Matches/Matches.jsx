@@ -66,7 +66,7 @@ const Matches = () => {
                             <select name="division" value={filters.division} onChange={handleFilterChange} className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-400">
                                 <option value="">All</option>
                                 <option value="Dhaka">Dhaka</option>
-                                <option value="Chattagra">Chattagra</option>
+                                <option value="chattogram">chattogram</option>
                                 <option value="Rangpur">Rangpur</option>
                                 <option value="Barisal">Barisal</option>
                                 <option value="Khulna">Khulna</option>

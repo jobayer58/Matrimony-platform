@@ -7,6 +7,7 @@ import { toast, ToastContainer, Zoom } from 'react-toastify';
 import UseAxiosSecure from '../../Hooks/UseAxiosSecure';
 import Swal from 'sweetalert2';
 import UseFavorite from '../../Hooks/UseFavorite';
+import UseAdmin from '../../Hooks/UseAdmin';
 
 const MatchesDetails = () => {
     // const loadedBiodata = useLoaderData();
@@ -14,6 +15,7 @@ const MatchesDetails = () => {
     const axiosSecure = UseAxiosSecure()
     const bioData = useLoaderData();
     const navigate = useNavigate()
+    const [isAdmin] = UseAdmin()
     const { biodataNo, biodataType, name, profileImage, dateOfBirth, height, weight, age, occupation, race, fathersName, mothersName, permanentDivision, presentDivision, expectedPartnerAge, expectedPartnerHeight, expectedPartnerWeight, contactEmail, mobileNumber, _id } = bioData;
 
     const [similarBioData, setSimilarBioData] = useState([]);
@@ -132,12 +134,14 @@ const MatchesDetails = () => {
 
                             {/* Action Buttons (No function attached) */}
                             <div className="flex flex-col sm:flex-row gap-4 mt-4">
-                                <button
+                                {
+                                    !isAdmin && <button
                                     onClick={handleAddToFavorite}
                                     className="bg-pink-500 hover:bg-pink-600  text-white px-5 py-2 rounded-md shadow transition"
                                 >
                                     Add to Favorites
                                 </button>
+                                }
                                 <button
                                     className="bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-2 rounded-md shadow transition"
                                 >
