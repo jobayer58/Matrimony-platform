@@ -49,6 +49,10 @@ const router = createBrowserRouter([
         loader: ({ params }) => fetch(`http://localhost:5000/matchesBio/${params.id}`)
       },
       {
+        path: '/about',
+        element: <p></p>
+      },
+      {
         path: 'contact',
         element: <PrivateRoute><Contact></Contact></PrivateRoute>
       },
