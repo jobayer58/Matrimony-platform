@@ -5,7 +5,6 @@ import SimilarMatchesCard from './SimilarMatchesCard';
 import PinkLoader from '../Shared/PinkLoader';
 import { toast, ToastContainer, Zoom } from 'react-toastify';
 import UseAxiosSecure from '../../Hooks/UseAxiosSecure';
-import Swal from 'sweetalert2';
 import UseFavorite from '../../Hooks/UseFavorite';
 import UseAdmin from '../../Hooks/UseAdmin';
 
@@ -16,7 +15,7 @@ const MatchesDetails = () => {
     const bioData = useLoaderData();
     const navigate = useNavigate()
     const [isAdmin] = UseAdmin()
-    const { biodataNo, biodataType, name, profileImage, dateOfBirth, height, weight, age, occupation, race, fathersName, mothersName, permanentDivision, presentDivision, expectedPartnerAge, expectedPartnerHeight, expectedPartnerWeight, contactEmail, mobileNumber, _id } = bioData;
+    const { serialNumber, biodataType, name, profileImage, dateOfBirth, height, weight, age, occupation, race, fathersName, mothersName, permanentDivision, presentDivision, expectedPartnerAge, expectedPartnerHeight, expectedPartnerWeight, contactEmail, mobileNumber, _id } = bioData;
 
     const [similarBioData, setSimilarBioData] = useState([]);
     const { user, loading } = useAuth();
@@ -31,7 +30,7 @@ const MatchesDetails = () => {
                 profileImage,
                 permanentDivision,
                 occupation,
-                biodataNo
+                serialNumber
             };
 
             axiosSecure.post('/favorite', bioItem)
@@ -83,9 +82,8 @@ const MatchesDetails = () => {
             });
     }, [bioData]);
 
-
-
     const isPremium = user?.role === 'premium';
+
     if (loading) {
         return <PinkLoader></PinkLoader>
     }
@@ -95,7 +93,7 @@ const MatchesDetails = () => {
             <ToastContainer></ToastContainer>
             <div className='bg-gradient-to-r from-pink-200 via-purple-200 to-indigo-200 py-10'>
                 <div className="max-w-[1000px] mx-auto p-6 bg-gradient-to-br from-pink-100 via-white to-pink-200  shadow-md rounded-md ">
-                    <h2 className="text-2xl font-bold mb-4">BioData ID: {biodataNo}</h2>
+                    <h2 className="text-2xl font-bold mb-4">BioData ID: {serialNumber}</h2>
 
                     <div className="flex flex-col md:flex-row gap-6 ">
                         <img src={profileImage} alt="Profile" className="w-60 h-60 object-cover rounded-lg" />
@@ -142,11 +140,11 @@ const MatchesDetails = () => {
                                         Add to Favorites
                                     </button>
                                 }
-                                <Link to='/requestContact'>
+                                <Link to={`/requestContact/${bioData._id}`}>
                                     <button
                                         className="bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-2 rounded-md shadow transition"
                                     >
-                                        Request Contact Info
+                                        Request For Contact Info
                                     </button>
                                 </Link>
                             </div>

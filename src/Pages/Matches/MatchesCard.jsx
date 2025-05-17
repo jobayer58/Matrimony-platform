@@ -3,7 +3,7 @@ import { FaHeart } from 'react-icons/fa';
 import { Link } from 'react-router';
 
 const MatchesCard = ({ bio }) => {
-    const { profileImage, biodataNo, biodataType, occupation, permanentDivision, age } = bio
+    const { profileImage, serialNumber, biodataType, occupation, permanentDivision, age } = bio
     return (
         <div className="relative bg-white rounded-xl hover:shadow-2xl transition-all duration-300 border-pink-400 border overflow-hidden group">
 
@@ -19,7 +19,7 @@ const MatchesCard = ({ bio }) => {
                     alt="Profile"
                     className="w-26 h-26 object-cover rounded-full border-4 border-pink-100 shadow-md"
                 />
-                <h3 className="mt-3 font-bold text-lg">Biodata #{biodataNo}</h3>
+                <h3 className="mt-3 font-bold text-lg">Biodata #{serialNumber}</h3>
                 <p className="text-gray-500 text-sm">{biodataType}</p>
             </div>
 

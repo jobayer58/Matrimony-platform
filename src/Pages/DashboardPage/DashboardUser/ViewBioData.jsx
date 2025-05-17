@@ -17,6 +17,7 @@ const ViewBioData = () => {
             try {
                 const res = await axiosSecure.get(`/myBioData?email=${user?.email}`);
                 setBioData(res.data);
+                setLoading(true)
             } catch (error) {
                 console.error('Error fetching bio data:', error);
             } finally {

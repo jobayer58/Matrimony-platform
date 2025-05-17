@@ -27,6 +27,7 @@ import {
 import FavoriteBioData from './Pages/DashboardPage/DashboardUser/FavoriteBioData.jsx';
 import ViewBioData from './Pages/DashboardPage/DashboardUser/ViewBioData.jsx';
 import About from './Pages/About/About.jsx';
+import ContactRequest from './Pages/Matches/ContactRequest.jsx';
 
 const queryClient = new QueryClient()
 
@@ -50,8 +51,9 @@ const router = createBrowserRouter([
         loader: ({ params }) => fetch(`http://localhost:5000/matchesBio/${params.id}`)
       },
       {
-        path: '/requestContact',
-        element: <p>contact</p>
+        path: '/requestContact/:id',
+        element: <ContactRequest></ContactRequest>,
+        loader: ({ params }) => fetch(`http://localhost:5000/matchesBio/${params.id}`)
       },
       {
         path: '/about',

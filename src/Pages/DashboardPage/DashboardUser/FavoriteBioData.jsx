@@ -67,7 +67,7 @@ const FavoriteBioData = () => {
                                             />
                                         </td>
                                         <td className="px-4 py-4 border-b">{bio.name}</td>
-                                        <td className="px-4 py-4 border-b">{bio.biodataNo}</td>
+                                        <td className="px-4 py-4 border-b">{bio.serialNumber}</td>
                                         <td className="px-4 py-4 border-b">{bio.permanentDivision}</td>
                                         <td className="px-4 py-4 border-b">{bio.occupation}</td>
                                         <td className="px-4 py-4 border-b text-center">
