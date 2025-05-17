@@ -91,6 +91,7 @@ const CheckoutForm = () => {
                     userEmail: user?.email,
                     mobileNumber: bioData?.mobileNumber,
                     price: price,
+                    contactEmail: bioData.contactEmail,
                     transactionId: paymentIntent?.id,
                     date: new Date(), // convert utc date 
                     status: "pending",

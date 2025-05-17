@@ -132,10 +132,13 @@ const Dashboard = () => {
             {/* Main Content */}
             <main className="flex-1 lg:ml-96 md:ml-62 overflow-y-auto w-full">
                 <Outlet />
+                {/* {
+                    isAdmin ? navigate('/dashboard/admin') : navigate('/dashboard/viewBioData')
+                } */}
                 {
                     isAdmin ?
-                        <Navigate to='/dashboard/admin' replace={true}></Navigate>
-                        : <Navigate to='/dashboard/viewBioData' replace={true}></Navigate>
+                        <Navigate to='/dashboard/admin' ></Navigate>
+                        : <Navigate to='/dashboard/viewBioData' ></Navigate>
                 }
             </main>
         </div>

@@ -28,6 +28,7 @@ import FavoriteBioData from './Pages/DashboardPage/DashboardUser/FavoriteBioData
 import ViewBioData from './Pages/DashboardPage/DashboardUser/ViewBioData.jsx';
 import About from './Pages/About/About.jsx';
 import ContactRequest from './Pages/Matches/ContactRequest.jsx';
+import MyContactRequest from './Pages/DashboardPage/DashboardUser/MyContactRequest.jsx';
 
 const queryClient = new QueryClient()
 
@@ -88,7 +89,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard/contactRequest',
-        element: <p>contact</p>
+        element: <MyContactRequest></MyContactRequest>,
       },
       {
         path: '/dashboard/favorites',
