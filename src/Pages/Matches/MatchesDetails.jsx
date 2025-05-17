@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../Hooks/UseAuth';
-import { useLoaderData, useNavigate } from 'react-router';
+import { Link, useLoaderData, useNavigate } from 'react-router';
 import SimilarMatchesCard from './SimilarMatchesCard';
 import PinkLoader from '../Shared/PinkLoader';
 import { toast, ToastContainer, Zoom } from 'react-toastify';
@@ -33,7 +33,7 @@ const MatchesDetails = () => {
                 occupation,
                 biodataNo
             };
-    
+
             axiosSecure.post('/favorite', bioItem)
                 .then(res => {
                     if (res.data.insertedId) {
@@ -59,8 +59,8 @@ const MatchesDetails = () => {
             navigate('/login');
         }
     };
-    
-    
+
+
 
     useEffect(() => {
         if (!bioData) return;
@@ -136,17 +136,19 @@ const MatchesDetails = () => {
                             <div className="flex flex-col sm:flex-row gap-4 mt-4">
                                 {
                                     !isAdmin && <button
-                                    onClick={handleAddToFavorite}
-                                    className="bg-pink-500 hover:bg-pink-600  text-white px-5 py-2 rounded-md shadow transition"
-                                >
-                                    Add to Favorites
-                                </button>
+                                        onClick={handleAddToFavorite}
+                                        className="bg-pink-500 hover:bg-pink-600  text-white px-5 py-2 rounded-md shadow transition"
+                                    >
+                                        Add to Favorites
+                                    </button>
                                 }
-                                <button
-                                    className="bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-2 rounded-md shadow transition"
-                                >
-                                    Request Contact Info
-                                </button>
+                                <Link to='/requestContact'>
+                                    <button
+                                        className="bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-2 rounded-md shadow transition"
+                                    >
+                                        Request Contact Info
+                                    </button>
+                                </Link>
                             </div>
                         </div>
                     </div>

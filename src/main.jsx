@@ -50,6 +50,10 @@ const router = createBrowserRouter([
         loader: ({ params }) => fetch(`http://localhost:5000/matchesBio/${params.id}`)
       },
       {
+        path: '/requestContact',
+        element: <p>contact</p>
+      },
+      {
         path: '/about',
         element: <About></About>
       },
