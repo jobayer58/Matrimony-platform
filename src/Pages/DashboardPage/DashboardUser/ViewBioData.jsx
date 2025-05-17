@@ -4,6 +4,7 @@ import UseAuth from '../../../Hooks/UseAuth';
 import PinkLoader from '../../Shared/PinkLoader';
 import { NavLink } from 'react-router';
 import NoBIoDataPage from './NoBIoDataPage';
+import Swal from 'sweetalert2';
 
 const ViewBioData = () => {
     // const { id } = useParams();
@@ -41,6 +42,54 @@ const ViewBioData = () => {
     const { biodataNo, profileImage, name, biodataType, dateOfBirth, age, height, weight, occupation, race, fathersName, mothersName, permanentDivision, presentDivision, expectedPartnerAge, expectedPartnerHeight, expectedPartnerWeight, contactEmail, mobileNumber
     } = bioData;
 
+    const handleRequestPremium = () => {
+        Swal.fire({
+            title: "Are you sure to make you premium?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes",
+          }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.post("/premiumRequest", {
+                    serialNumber: bioData?.serialNumber,
+                    name: bioData?.name,
+                    email: bioData?.contactEmail, 
+                    date: new Date().toISOString(),
+                    status: "pending",
+                })
+                .then((res) => {
+                  if (res.data.message) {
+                    Swal.fire({
+                      title: "Request failed!",
+                      text: res.data?.message,
+                      icon: "error",
+                      timer: 3000,
+                    });
+                  }
+                  if (res.data?.insertedId) {
+                    Swal.fire({
+                      title: "Request submitted!",
+                      text: "You’ll be notified once the admin approves it.",
+                      icon: "success",
+                      timer: 3000,
+                    });
+                  }
+                })
+                .catch(() => {
+                  Swal.fire({
+                    title: "Request failed!",
+                    text: "Please try again.",
+                    icon: "error",
+                    timer: 3000,
+                  });
+                });
+            }
+          });
+    }
+
+
     return (
         <div className='bg-gradient-to-r from-pink-200 via-purple-200 to-indigo-200 py-10 min-h-screen'>
             <div className="max-w-[1000px] mx-auto p-6 bg-gradient-to-br from-pink-100 via-white to-pink-200 shadow-md rounded-md ">
@@ -75,7 +124,7 @@ const ViewBioData = () => {
                         </div>
 
                         {/* Submit button */}
-                        <div className="mt-8 text-center">
+                        <div onClick={handleRequestPremium} className="mt-8 text-center">
                             <button
                                 type="submit"
                                 className="bg-pink-600 hover:bg-pink-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition"

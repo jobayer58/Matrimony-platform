@@ -3,10 +3,12 @@ import UseFavorite from '../../../Hooks/UseFavorite';
 import { Trash2 } from 'lucide-react';
 import Swal from 'sweetalert2';
 import UseAxiosSecure from '../../../Hooks/UseAxiosSecure';
+import { useNavigate } from 'react-router';
 
 const FavoriteBioData = () => {
     const [favorite, refetch] = UseFavorite()
     const axiosSecure = UseAxiosSecure()
+    const navigate = useNavigate()
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -30,6 +32,7 @@ const FavoriteBioData = () => {
                                 icon: "success"
                             });
                         }
+                        navigate('/dashboard/favorites')
                     })
             }
         });

@@ -29,6 +29,8 @@ import ViewBioData from './Pages/DashboardPage/DashboardUser/ViewBioData.jsx';
 import About from './Pages/About/About.jsx';
 import ContactRequest from './Pages/Matches/ContactRequest.jsx';
 import MyContactRequest from './Pages/DashboardPage/DashboardUser/MyContactRequest.jsx';
+import AdminHome from './Pages/DashboardPage/DashboardAdmin/AdminHome.jsx';
+import ApprovedPremium from './Pages/DashboardPage/DashboardAdmin/ApprovedPremium.jsx';
 
 const queryClient = new QueryClient()
 
@@ -103,7 +105,7 @@ const router = createBrowserRouter([
 
       {
         path: '/dashboard/admin',
-        element: <p>admin</p>
+        element: <AdminHome></AdminHome>
       },
       {
         path: '/dashboard/manage',
@@ -111,7 +113,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard/premium',
-        element: <p>Premium</p>
+        element: <ApprovedPremium></ApprovedPremium>
       },
       {
         path: '/dashboard/contactRequest',

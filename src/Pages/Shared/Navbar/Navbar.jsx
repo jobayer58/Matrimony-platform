@@ -3,11 +3,13 @@ import { Link, NavLink, useNavigate } from 'react-router';
 import UseAuth from '../../../Hooks/UseAuth';
 import { Tooltip } from 'react-tooltip';
 import Swal from 'sweetalert2';
+import UseAdmin from '../../../Hooks/UseAdmin';
 // text-[#c48c46] text-[#66451c]
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { user, logOut } = UseAuth()
+    const [isAdmin] = UseAdmin()
     const navigate = useNavigate()
     const path = <>
         <NavLink to='/' className={({ isActive }) =>
@@ -26,11 +28,14 @@ const Navbar = () => {
             isActive ? "text-pink-700 font-semibold" : "text-pink-400"
         }>Contact</NavLink>
         {
-            user?.email && 
-            <NavLink to='/dashboard' className={({ isActive }) =>
+            user && isAdmin && <NavLink to='/dashboard/admin' className={({ isActive }) =>
                 isActive ? "text-pink-700 font-semibold" : "text-pink-400"
             }>Dashboard</NavLink>
-
+        }
+        {
+            user && !isAdmin && <NavLink to='/dashboard/viewBioData' className={({ isActive }) =>
+                isActive ? "text-pink-700 font-semibold" : "text-pink-400"
+            }>Dashboard</NavLink>
         }
     </>
 

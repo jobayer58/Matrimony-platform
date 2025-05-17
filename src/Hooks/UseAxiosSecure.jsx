@@ -16,6 +16,7 @@ const UseAxiosSecure = () => {
         return config;
     }, function (error) {
         return Promise.reject(error);
+        
     });
 
     // intercepts 401 and 403 status
@@ -30,8 +31,7 @@ const UseAxiosSecure = () => {
         return Promise.reject(error);
     })
 
-
-
+// yesss
 
     return axiosSecure
 };

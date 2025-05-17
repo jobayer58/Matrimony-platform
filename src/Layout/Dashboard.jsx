@@ -7,7 +7,7 @@ import UseAdmin from '../Hooks/UseAdmin';
 
 const Dashboard = () => {
     const location = useLocation();
-    const {  logOut } = UseAuth();
+    const { logOut } = UseAuth();
     // const isAdmin = user?.role === 'admin';
     const [isAdmin] = UseAdmin()
     const navigate = useNavigate();
@@ -54,7 +54,7 @@ const Dashboard = () => {
                     <NavLink to="/dashboard/manage" className={navLinkStyle} onClick={closeSidebar}>
                         <Users className="w-5 h-5" /> Manage Users
                     </NavLink>
-                    <NavLink to="/dashboard/premium" className={navLinkStyle} onClick={closeSidebar}> 
+                    <NavLink to="/dashboard/premium" className={navLinkStyle} onClick={closeSidebar}>
                         <Crown className="w-5 h-5" /> Approved Premium
                     </NavLink>
                     <NavLink to="/dashboard/contactRequest" className={navLinkStyle} onClick={closeSidebar}>
@@ -132,14 +132,6 @@ const Dashboard = () => {
             {/* Main Content */}
             <main className="flex-1 lg:ml-96 md:ml-62 overflow-y-auto w-full">
                 <Outlet />
-                {/* {
-                    isAdmin ? navigate('/dashboard/admin') : navigate('/dashboard/viewBioData')
-                } */}
-                {
-                    isAdmin ?
-                        <Navigate to='/dashboard/admin' ></Navigate>
-                        : <Navigate to='/dashboard/viewBioData' ></Navigate>
-                }
             </main>
         </div>
     );
