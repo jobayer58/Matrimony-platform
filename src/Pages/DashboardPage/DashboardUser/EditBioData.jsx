@@ -408,6 +408,12 @@ const EditBioData = () => {
                                     <option value="">Select Occupation</option>
                                     <option value="student">Student</option>
                                     <option value="job">Job Holder</option>
+                                    <option value="business">Business</option>
+                                    <option value="unemployed">Unemployed</option>
+                                    <option value="freelancer">Freelancer</option>
+                                    <option value="webDeveloper">Web Developer</option>
+                                    <option value="softwareEngineer">Software engineer</option>
+                                    <option value="others">Others</option>
                                 </select>
                             </div>
                         </div>

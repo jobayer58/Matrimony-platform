@@ -1,14 +1,11 @@
 import React from 'react';
-import UseAuth from '../../../Hooks/UseAuth';
 import UseAxiosSecure from '../../../Hooks/UseAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { FaDollarSign, FaFemale, FaMale } from 'react-icons/fa';
 import Statistics from './Statistic';
-const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', 'red', 'pink'];
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 const AdminHome = () => {
-    const { user } = UseAuth()
     const axiosSecure = UseAxiosSecure()
     const { data: stats = {} } = useQuery({
         queryKey: ['admin-stats'],

@@ -5,12 +5,14 @@ import PinkLoader from '../../Shared/PinkLoader';
 import { NavLink } from 'react-router';
 import NoBIoDataPage from './NoBIoDataPage';
 import Swal from 'sweetalert2';
+import UsePremium from '../../../Hooks/UsePremium';
 
 const ViewBioData = () => {
     // const { id } = useParams();
     const { user, loading, setLoading } = UseAuth();
     const axiosSecure = UseAxiosSecure();
     const [bioData, setBioData] = useState(null);
+    const [isPremiumUser] = UsePremium()
 
 
     useEffect(() => {
@@ -50,43 +52,43 @@ const ViewBioData = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes",
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
                 axiosSecure.post("/premiumRequest", {
                     serialNumber: bioData?.serialNumber,
                     name: bioData?.name,
-                    email: bioData?.contactEmail, 
+                    email: bioData?.contactEmail,
                     date: new Date().toISOString(),
                     status: "pending",
                 })
-                .then((res) => {
-                  if (res.data.message) {
-                    Swal.fire({
-                      title: "Request failed!",
-                      text: res.data?.message,
-                      icon: "error",
-                      timer: 3000,
+                    .then((res) => {
+                        if (res.data.message) {
+                            Swal.fire({
+                                title: "Request failed!",
+                                text: res.data?.message,
+                                icon: "error",
+                                timer: 3000,
+                            });
+                        }
+                        if (res.data?.insertedId) {
+                            Swal.fire({
+                                title: "Request submitted!",
+                                text: "You’ll be notified once the admin approves it.",
+                                icon: "success",
+                                timer: 3000,
+                            });
+                        }
+                    })
+                    .catch(() => {
+                        Swal.fire({
+                            title: "Request failed!",
+                            text: "Please try again.",
+                            icon: "error",
+                            timer: 3000,
+                        });
                     });
-                  }
-                  if (res.data?.insertedId) {
-                    Swal.fire({
-                      title: "Request submitted!",
-                      text: "You’ll be notified once the admin approves it.",
-                      icon: "success",
-                      timer: 3000,
-                    });
-                  }
-                })
-                .catch(() => {
-                  Swal.fire({
-                    title: "Request failed!",
-                    text: "Please try again.",
-                    icon: "error",
-                    timer: 3000,
-                  });
-                });
             }
-          });
+        });
     }
 
 
@@ -124,15 +126,28 @@ const ViewBioData = () => {
                         </div>
 
                         {/* Submit button */}
-                        <div onClick={handleRequestPremium} className="mt-8 text-center">
-                            <button
-                                type="submit"
-                                className="bg-pink-600 hover:bg-pink-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition"
-                            >
-                                Request For Premium BioData
-                            </button>
-                        </div>
+                        {isPremiumUser ?
+                            <div className="mt-8 text-center">
+                                <button
+                                    type="submit"
+                                    className="bg-green-600  text-white font-semibold px-6 py-3 rounded-lg shadow-md transition"
+                                >
+                                    Now You Are Premium Member
+                                </button>
 
+                            </div>
+                            :
+                            <div onClick={handleRequestPremium} className="mt-8 text-center">
+                                <button
+                                    type="submit"
+                                    className="bg-pink-600 hover:bg-pink-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition"
+                                >
+                                    Request For Premium BioData
+                                </button>
+
+                            </div>
+
+                        }
                     </div>
                 </div>
             </div>

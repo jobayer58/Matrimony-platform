@@ -68,7 +68,7 @@ const MatchesDetails = () => {
 
         const gender = bioData.biodataType;
 
-        fetch(`http://localhost:5000/matchesBio?gender=${gender}`)
+        fetch(`https://matrimony-server-mu.vercel.app/matchesBio?gender=${gender}`)
             .then(res => res.json())
             .then(matched => {
                 const filtered = matched
@@ -135,14 +135,14 @@ const MatchesDetails = () => {
                             {/* Action Buttons (No function attached) */}
                             <div className="flex flex-col sm:flex-row gap-4 mt-4">
                                 {
-                                    !isAdmin && <button
+                                    !isAdmin  && <button
                                         onClick={handleAddToFavorite}
                                         className="bg-pink-500 hover:bg-pink-600  text-white px-5 py-2 rounded-md shadow transition"
                                     >
                                         Add to Favorites
                                     </button>
                                 }
-                                { !isAdmin &&
+                                { !isAdmin  &&
                                     <Link to={`/requestContact/${bioData._id}`}>
                                         <button
                                             className="bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-2 rounded-md shadow transition"

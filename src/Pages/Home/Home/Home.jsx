@@ -13,8 +13,8 @@ const Home = () => {
     return (
         <div>
             <Banner></Banner>
-            <HowItWorks></HowItWorks>
             <PremiumBioData></PremiumBioData>
+            <HowItWorks></HowItWorks>
             
         </div>
     );
