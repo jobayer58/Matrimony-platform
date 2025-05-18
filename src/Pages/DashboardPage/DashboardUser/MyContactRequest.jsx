@@ -46,7 +46,7 @@ const MyContactRequest = () => {
                                             {req.status === "Approved" ? (
                                                 <div>
                                                     <p className="text-sm text-gray-700"><strong>Email:</strong> {req.contactEmail}</p>
-                                                    <p className="text-sm text-gray-700"><strong>Phone:</strong> {req.contactPhone}</p>
+                                                    <p className="text-sm text-gray-700"><strong>Phone:</strong> {req.mobileNumber}</p>
                                                 </div>
                                             ) : (
                                                 <span className="text-sm text-gray-400 italic">Wait for admin approval.</span>

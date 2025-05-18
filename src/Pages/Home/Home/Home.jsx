@@ -3,6 +3,7 @@ import Banner from '../Banner/Banner';
 import UseAuth from '../../../Hooks/UseAuth';
 import PinkLoader from '../../Shared/PinkLoader';
 import HowItWorks from '../HowItWorks';
+import PremiumBioData from '../PremiumBioData';
 
 const Home = () => {
     const {loading} = UseAuth()
@@ -13,6 +14,7 @@ const Home = () => {
         <div>
             <Banner></Banner>
             <HowItWorks></HowItWorks>
+            <PremiumBioData></PremiumBioData>
             
         </div>
     );

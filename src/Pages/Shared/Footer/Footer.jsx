@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from '../../../assets/footer.jpg'
 
 const Footer = () => {
     return (
@@ -7,7 +8,7 @@ const Footer = () => {
                 {/* Logo & About */}
                 <div>
                     <div className='flex items-center gap-2'>
-                        <img src="/src/assets/footer.jpg" className='md:h-14 md:w-14 h-10 w-10 object-cover' alt="logo" />
+                        <img src={logo} className='md:h-14 md:w-14 h-10 w-10 object-cover' alt="logo" />
                     <h2 className="text-2xl font-bold text-white"> Matrimony</h2>
                     </div>
                     <p className="mt-4 text-sm text-gray-400">

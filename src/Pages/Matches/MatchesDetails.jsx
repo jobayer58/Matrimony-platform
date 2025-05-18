@@ -7,6 +7,7 @@ import { toast, ToastContainer, Zoom } from 'react-toastify';
 import UseAxiosSecure from '../../Hooks/UseAxiosSecure';
 import UseFavorite from '../../Hooks/UseFavorite';
 import UseAdmin from '../../Hooks/UseAdmin';
+import UsePremium from '../../Hooks/UsePremium';
 
 const MatchesDetails = () => {
     // const loadedBiodata = useLoaderData();
@@ -15,6 +16,7 @@ const MatchesDetails = () => {
     const bioData = useLoaderData();
     const navigate = useNavigate()
     const [isAdmin] = UseAdmin()
+    const [isPremiumUser] = UsePremium()
     const { serialNumber, biodataType, name, profileImage, dateOfBirth, height, weight, age, occupation, race, fathersName, mothersName, permanentDivision, presentDivision, expectedPartnerAge, expectedPartnerHeight, expectedPartnerWeight, contactEmail, mobileNumber, _id } = bioData;
 
     const [similarBioData, setSimilarBioData] = useState([]);
@@ -82,7 +84,7 @@ const MatchesDetails = () => {
             });
     }, [bioData]);
 
-    const isPremium = user?.role === 'premium';
+    // const isPremium = user?.role === 'premium';
 
     if (loading) {
         return <PinkLoader></PinkLoader>
@@ -118,7 +120,7 @@ const MatchesDetails = () => {
                             </div>
 
                             {/* Contact Info Section */}
-                            {isPremium ? (
+                            {isAdmin || isPremiumUser ? (
                                 <div className="p-4 border border-green-400 rounded-md bg-green-50 shadow-sm">
                                     <h3 className="font-semibold text-lg mb-2 text-green-700">Contact Information</h3>
                                     <p><strong>Email:</strong> {contactEmail}</p>
@@ -140,13 +142,15 @@ const MatchesDetails = () => {
                                         Add to Favorites
                                     </button>
                                 }
-                                <Link to={`/requestContact/${bioData._id}`}>
-                                    <button
-                                        className="bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-2 rounded-md shadow transition"
-                                    >
-                                        Request For Contact Info
-                                    </button>
-                                </Link>
+                                { !isAdmin &&
+                                    <Link to={`/requestContact/${bioData._id}`}>
+                                        <button
+                                            className="bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-2 rounded-md shadow transition"
+                                        >
+                                            Request For Contact Info
+                                        </button>
+                                    </Link>
+                                }
                             </div>
                         </div>
                     </div>

@@ -31,6 +31,7 @@ import ContactRequest from './Pages/Matches/ContactRequest.jsx';
 import MyContactRequest from './Pages/DashboardPage/DashboardUser/MyContactRequest.jsx';
 import AdminHome from './Pages/DashboardPage/DashboardAdmin/AdminHome.jsx';
 import ApprovedPremium from './Pages/DashboardPage/DashboardAdmin/ApprovedPremium.jsx';
+import ApprovedContactRequest from './Pages/DashboardPage/DashboardAdmin/ApprovedContactRequest.jsx';
 
 const queryClient = new QueryClient()
 
@@ -90,7 +91,7 @@ const router = createBrowserRouter([
         element: <ViewBioData></ViewBioData>
       },
       {
-        path: '/dashboard/contactRequest',
+        path: '/dashboard/userContactRequest',
         element: <MyContactRequest></MyContactRequest>,
       },
       {
@@ -116,8 +117,8 @@ const router = createBrowserRouter([
         element: <ApprovedPremium></ApprovedPremium>
       },
       {
-        path: '/dashboard/contactRequest',
-        element: <p>contactRequest</p>
+        path: '/dashboard/adminContactRequest',
+        element: <ApprovedContactRequest></ApprovedContactRequest>,
       },
       {
         path: '/dashboard/successStory',

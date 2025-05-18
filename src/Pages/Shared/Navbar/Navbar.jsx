@@ -4,7 +4,8 @@ import UseAuth from '../../../Hooks/UseAuth';
 import { Tooltip } from 'react-tooltip';
 import Swal from 'sweetalert2';
 import UseAdmin from '../../../Hooks/UseAdmin';
-// text-[#c48c46] text-[#66451c]
+import logo from '../../../assets/logo.jpg'
+
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -57,7 +58,7 @@ const Navbar = () => {
                     <div className="flex justify-between items-center h-20">
                         {/* Logo */}
                         <div className="flex justify-center items-center  text-indigo-600 gap-1">
-                            <img src="/src/assets/logo.jpg" className='lg:h-14 lg:w-14 h-10 w-10 object-cover' alt="" />
+                            <img src={logo} className='lg:h-14 lg:w-14 h-10 w-10 object-cover' alt="" />
                             <p className='text-pink-400 lg:text-3xl font-bold md:text-[18px] text-2xl' >Matrimony</p>
                         </div>
                         {/* Desktop Menu */}

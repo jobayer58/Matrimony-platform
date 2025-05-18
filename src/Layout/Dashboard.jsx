@@ -57,7 +57,7 @@ const Dashboard = () => {
                     <NavLink to="/dashboard/premium" className={navLinkStyle} onClick={closeSidebar}>
                         <Crown className="w-5 h-5" /> Approved Premium
                     </NavLink>
-                    <NavLink to="/dashboard/contactRequest" className={navLinkStyle} onClick={closeSidebar}>
+                    <NavLink to="/dashboard/adminContactRequest" className={navLinkStyle} onClick={closeSidebar}>
                         <Phone className="w-5 h-5" /> Approved Contact Requests
                     </NavLink>
                     <NavLink to="/dashboard/successStory" className={navLinkStyle} onClick={closeSidebar}>
@@ -72,7 +72,7 @@ const Dashboard = () => {
                     <NavLink to="/dashboard/viewBioData" className={navLinkStyle} onClick={closeSidebar}>
                         <Eye className="w-5 h-5" /> View BioData
                     </NavLink>
-                    <NavLink to="/dashboard/contactRequest" className={navLinkStyle} onClick={closeSidebar}>
+                    <NavLink to="/dashboard/userContactRequest" className={navLinkStyle} onClick={closeSidebar}>
                         <Phone className="w-5 h-5" /> My Contact Request
                     </NavLink>
                     <NavLink to="/dashboard/favorites" className={navLinkStyle} onClick={closeSidebar}>

@@ -5,19 +5,21 @@ import UseAxiosPublic from '../../../Hooks/UseAxiosPublic';
 import UseAxiosSecure from '../../../Hooks/UseAxiosSecure';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
-import { ArrowRight, FolderUp } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const EditBioData = () => {
-    const { user, setLoading } = UseAuth();
+    const { user } = UseAuth();
     const navigate = useNavigate();
     const axiosPublic = UseAxiosPublic();
     const axiosSecure = UseAxiosSecure();
+
     const [isEditing, setIsEditing] = useState(false);
     const [existingImage, setExistingImage] = useState('');
-    const [previewImage, setPreviewImage] = useState(null);
+    const [loading, setLoading] = useState(true);
+
     const { register, handleSubmit, setValue } = useForm();
 
     // Load user's existing BioData
@@ -51,19 +53,6 @@ const EditBioData = () => {
             fetchBioData();
         }
     }, [user?.email, axiosSecure, setValue]);
-
-    // image change
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            // Create preview URL
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setPreviewImage(reader.result);
-            };
-            reader.readAsDataURL(file);
-        }
-    };
 
     const onSubmit = async (data) => {
         setLoading(true);
@@ -111,7 +100,6 @@ const EditBioData = () => {
         } finally {
             setLoading(false);
         }
-        setPreviewImage(null);
     };
     return (
         <div className="min-h-screen bg-gradient-to-br from-pink-50 to-indigo-50 py-10 px-4">
@@ -129,12 +117,11 @@ const EditBioData = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-6">
                     {/* Profile Image Section */}
                     <div className="flex flex-col items-center space-y-4">
-                        {/* Preview image */}
-                        {(previewImage || existingImage) && (
+                        {existingImage && (
                             <div className="relative group">
                                 <img
-                                    src={previewImage || existingImage}
-                                    alt="Profile Preview"
+                                    src={existingImage}
+                                    alt="Profile"
                                     className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md"
                                 />
                                 <div className="absolute inset-0 bg-black bg-opacity-30 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -142,45 +129,29 @@ const EditBioData = () => {
                                 </div>
                             </div>
                         )}
-
-                        {/* upload image area */}
                         <div className="w-full max-w-xs">
                             <label className="block text-sm font-medium text-gray-700 mb-2">
-                                {previewImage || existingImage ? 'Change Profile Photo' : 'Upload Profile Photo'}
+                                {existingImage ? 'Change Profile Photo' : 'Upload Profile Photo'}
                             </label>
                             <div className="flex items-center justify-center w-full">
                                 <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition">
                                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                        {previewImage ? (
-                                            <img
-                                                src={previewImage}
-                                                alt="Selected Preview"
-                                                className="w-20 h-20 object-cover rounded-md mb-2"
-                                            />
-                                        ) : (
-                                            <>
-                                                <FolderUp className="w-8 h-8 mb-4 text-gray-500"></FolderUp>
-                                                <p className="mb-2 text-sm text-gray-500">
-                                                    <span className="font-semibold">Click to upload</span> or drag and drop
-                                                </p>
-                                            </>
-                                        )}
+                                        <svg className="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                        </svg>
+                                        <p className="mb-2 text-sm text-gray-500">
+                                            <span className="font-semibold">Click to upload</span> or drag and drop
+                                        </p>
                                         <p className="text-xs text-gray-500">PNG, JPG (MAX. 2MB)</p>
                                     </div>
                                     <input
                                         type="file"
                                         {...register('profileImage')}
-                                        onChange={handleImageChange}
                                         className="hidden"
                                         accept="image/*"
                                     />
                                 </label>
                             </div>
-                            {previewImage && (
-                                <p className="text-green-500 text-sm mt-2 text-center">
-                                    New photo selected! Submit.
-                                </p>
-                            )}
                         </div>
                     </div>
 
@@ -287,106 +258,6 @@ const EditBioData = () => {
                                 </select>
                             </div>
 
-
-
-                        </div>
-                    </div>
-
-                    {/* Physical Attributes Section */}
-                    <div className="space-y-6">
-                        <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">
-                            Physical Attributes
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {/* Height */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    Height *
-                                </label>
-                                <select
-                                    {...register("height", { required: true })}
-                                    className="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-300 focus:border-pink-400 transition"
-                                    required
-                                >
-                                    <option value="">Select Height</option>
-                                    <option value="4'8&quot;">4'8"</option>
-                                    <option value="4'9&quot;">4'9"</option>
-                                    <option value="4'10&quot;">4'10"</option>
-                                    <option value="4'11&quot;">4'11"</option>
-                                    <option value="5'0&quot;">5'0"</option>
-                                    <option value="5'1&quot;">5'1"</option>
-                                    <option value="5'2&quot;">5'2"</option>
-                                    <option value="5'3&quot;">5'3"</option>
-                                    <option value="5'4&quot;">5'4"</option>
-                                    <option value="5'5&quot;">5'5"</option>
-                                    <option value="5'6&quot;">5'6"</option>
-                                    <option value="5'7&quot;">5'7"</option>
-                                    <option value="5'8&quot;">5'8"</option>
-                                    <option value="5'9&quot;">5'9"</option>
-                                    <option value="5'10&quot;">5'10"</option>
-                                </select>
-                            </div>
-
-                            {/* Weight */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    Weight *
-                                </label>
-                                <select
-                                    {...register("weight", { required: true })}
-                                    className="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-300 focus:border-pink-400 transition"
-                                    required
-                                >
-                                    <option value="">Select Weight</option>
-                                    <option>45kg - 50kg</option>
-                                    <option>50kg - 55kg</option>
-                                    <option>55kg - 60kg</option>
-                                    <option>60kg - 65kg</option>
-                                    <option>65kg - 70kg</option>
-                                    <option>70kg - 75kg</option>
-                                    <option>75kg - 80kg</option>
-                                </select>
-                            </div>
-
-                            {/* Complexion */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    Complexion *
-                                </label>
-                                <select
-                                    {...register("race", { required: true })}
-                                    className="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-300 focus:border-pink-400 transition"
-                                    required
-                                >
-                                    <option value="">Select Complexion</option>
-                                    <option value="fair">Fair</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="dark">Dark</option>
-                                </select>
-                            </div>
-
-                            {/* Occupation */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    Occupation *
-                                </label>
-                                <select
-                                    {...register("occupation", { required: true })}
-                                    className="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-300 focus:border-pink-400 transition"
-                                    required
-                                >
-                                    <option value="">Select Occupation</option>
-                                    <option value="student">Student</option>
-                                    <option value="job">Job Holder</option>
-                                    <option value="business">Business</option>
-                                    <option value="unemployed">Unemployed</option>
-                                    <option value="freelancer">Freelancer</option>
-                                    <option value="webDeveloper">Web Developer</option>
-                                    <option value="softwareEngineer">Software engineer</option>
-                                    <option value="others">Others</option>
-                                </select>
-                            </div>
-
                             {/* expected partner Age */}
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -440,7 +311,6 @@ const EditBioData = () => {
                                     required
                                 >
                                     <option value="">Select Weight</option>
-                                    <option>45kg - 50kg</option>
                                     <option>50kg - 55kg</option>
                                     <option>55kg - 60kg</option>
                                     <option>60kg - 65kg</option>
@@ -450,6 +320,96 @@ const EditBioData = () => {
                                 </select>
                             </div>
 
+                        </div>
+                    </div>
+
+                    {/* Physical Attributes Section */}
+                    <div className="space-y-6">
+                        <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">
+                            Physical Attributes
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {/* Height */}
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Height *
+                                </label>
+                                <select
+                                    {...register("height", { required: true })}
+                                    className="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-300 focus:border-pink-400 transition"
+                                    required
+                                >
+                                    <option value="">Select Height</option>
+                                    <option value="4'8&quot;">4'8"</option>
+                                    <option value="4'9&quot;">4'9"</option>
+                                    <option value="4'10&quot;">4'10"</option>
+                                    <option value="4'11&quot;">4'11"</option>
+                                    <option value="5'0&quot;">5'0"</option>
+                                    <option value="5'1&quot;">5'1"</option>
+                                    <option value="5'2&quot;">5'2"</option>
+                                    <option value="5'3&quot;">5'3"</option>
+                                    <option value="5'4&quot;">5'4"</option>
+                                    <option value="5'5&quot;">5'5"</option>
+                                    <option value="5'6&quot;">5'6"</option>
+                                    <option value="5'7&quot;">5'7"</option>
+                                    <option value="5'8&quot;">5'8"</option>
+                                    <option value="5'9&quot;">5'9"</option>
+                                    <option value="5'10&quot;">5'10"</option>
+                                </select>
+                            </div>
+
+                            {/* Weight */}
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Weight *
+                                </label>
+                                <select
+                                    {...register("weight", { required: true })}
+                                    className="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-300 focus:border-pink-400 transition"
+                                    required
+                                >
+                                    <option value="">Select Weight</option>
+                                    <option>50kg - 55kg</option>
+                                    <option>55kg - 60kg</option>
+                                    <option>60kg - 65kg</option>
+                                    <option>65kg - 70kg</option>
+                                    <option>70kg - 75kg</option>
+                                    <option>75kg - 80kg</option>
+                                </select>
+                            </div>
+
+                            {/* Complexion */}
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Complexion *
+                                </label>
+                                <select
+                                    {...register("race", { required: true })}
+                                    className="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-300 focus:border-pink-400 transition"
+                                    required
+                                >
+                                    <option value="">Select Complexion</option>
+                                    <option value="fair">Fair</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="dark">Dark</option>
+                                </select>
+                            </div>
+
+                            {/* Occupation */}
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Occupation *
+                                </label>
+                                <select
+                                    {...register("occupation", { required: true })}
+                                    className="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-300 focus:border-pink-400 transition"
+                                    required
+                                >
+                                    <option value="">Select Occupation</option>
+                                    <option value="student">Student</option>
+                                    <option value="job">Job Holder</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
 

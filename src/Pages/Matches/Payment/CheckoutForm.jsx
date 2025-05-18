@@ -108,7 +108,7 @@ const CheckoutForm = () => {
                         timer: 2000,
                     });
                     setProcessing(false);
-                    navigate('/dashboard/contactRequest')
+                    navigate('/dashboard/userContactRequest')
                 }
 
 
