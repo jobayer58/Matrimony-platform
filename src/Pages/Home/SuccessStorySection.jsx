@@ -12,7 +12,10 @@ const SuccessStorySection = () => {
     useEffect(() => {
         axios.get('https://matrimony-server-mu.vercel.app/successStory')
             .then(res => setStories(res.data))
-            .catch(err => console.error(err));
+            .catch(err => {
+                // console.error(err)
+                err.message
+            });
     }, []);
 
     return (

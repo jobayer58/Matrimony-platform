@@ -56,8 +56,8 @@ const GotMarried = () => {
               });
             }
           } catch (error) {
-            console.error(error);
-            Swal.fire('Error!', 'Something went wrong.', 'error');
+            // console.error(error);
+            Swal.fire(error, 'Something went wrong.', 'error');
           }
         }
       };

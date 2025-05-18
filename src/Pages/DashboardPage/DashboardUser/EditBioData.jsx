@@ -45,7 +45,8 @@ const EditBioData = () => {
                     });
                 }
             } catch (error) {
-                console.error('Error loading BioData:', error);
+                // console.error('Error loading BioData:', error);
+                error.message
             }
         };
 

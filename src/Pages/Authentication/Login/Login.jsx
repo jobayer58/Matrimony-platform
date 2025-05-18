@@ -65,7 +65,8 @@ const Login = () => {
                     }
                     axiosSecure.post('/users', userInfo)
                         .then(res => {
-                            console.log(res.data);
+                            // console.log(res.data);
+                            res.data
     
                         })
                     Swal.fire({

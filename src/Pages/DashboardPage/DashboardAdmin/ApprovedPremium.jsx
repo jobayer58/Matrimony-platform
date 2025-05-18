@@ -11,7 +11,7 @@ const ApprovedPremium = () => {
         axiosSecure
           .patch(`/premiumRequest?email=${email}`, { status })
           .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
       
             const premiumModified = res.data?.premiumRequestUpdate?.modifiedCount || 0;
             const roleModified = res.data?.userRoleUpdate?.modifiedCount || 0;
@@ -40,7 +40,7 @@ const ApprovedPremium = () => {
         axiosSecure
           .patch(`/premiumRequest?email=${email}`, { status })
           .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             const premiumModified = res.data?.premiumRequestUpdate?.modifiedCount || 0;
             const roleModified = res.data?.userRoleUpdate?.modifiedCount || 0;
       

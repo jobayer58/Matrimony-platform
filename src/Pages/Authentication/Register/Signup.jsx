@@ -19,7 +19,7 @@ const Signup = () => {
     }
 
     const onSubmit = data => {
-        console.log(data);
+        // console.log(data);
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user
@@ -44,7 +44,7 @@ const Signup = () => {
                                 }
                             })
                         reset()
-                        console.log("Photo URL:", data.photoURL);
+                        // console.log("Photo URL:", data.photoURL);
                         navigate('/')
                     })
                     .catch(error => {
@@ -62,7 +62,8 @@ const Signup = () => {
                 }
                 axiosSecure.post('/users', userInfo)
                     .then(res => {
-                        console.log(res.data);
+                        // console.log(res.data);
+                        res.data
 
                     })
                 Swal.fire({

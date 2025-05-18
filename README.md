@@ -1,12 +1,73 @@
-# React + Vite
+# MATRIMONY
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ - 🥳 Got Married Feature (Success Story Submission)
+ - This feature allows users to submit their marriage success story after getting married through the platform. Admins can view submitted stories, and selected ones are displayed on the homepage.
 
-Currently, two official plugins are available:
+# Admin Credentials
+- email: matimonyadmin@gmail.com
+- pass: 123ABCD#as
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+ ## 🔗 Live Site
+
+👉 [BlogWide Live](https://matrimony-platform-60db5.web.app/)
+
+---
+
+
+# 📤 Success Story Submission (User Dashboard)
+
+
+- Users can fill out a form to submit their success story.
+
+- The form includes:
+- 
+- your_name – Name of the user submitting.
+- 
+- partner_name – Name of the partner they married.
+- 
+- got_married_date – Date of the marriage.
+- 
+- success_story – Text/story of how they got married.
+- 
+- partner_id – (important) The unique ID of the partner’s biodata.
+
+
+# 🔒 Validation & Rules
+
+- partner_id is required and stored for future linking to the biodata.
+
+- A user cannot submit more than one story for the same partner.
+- 
+- Only admin can approve or reject the story.
+- 
+- Approved stories are shown on the homepage carousel.
+
+### Frontend
+- React
+- Tailwind CSS
+- DaisyUI
+- React Router DOM
+- Axios
+- Firebase
+- React Toastify
+- framer motion
+- React-data-table
+- react toastify
+- toast alert
+- SweetAlert2 
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB
+- CORS
+- dotenv
+
+
+## 🔗 Live Site
+
+👉 [BlogWide Live](https://matrimony-platform-60db5.web.app/)
+
+---

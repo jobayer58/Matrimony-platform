@@ -22,7 +22,8 @@ const ViewBioData = () => {
                 setBioData(res.data);
                 setLoading(true)
             } catch (error) {
-                console.error('Error fetching bio data:', error);
+                // console.error('Error fetching bio data:', error);
+                error.message
             } finally {
                 setLoading(false);
             }
