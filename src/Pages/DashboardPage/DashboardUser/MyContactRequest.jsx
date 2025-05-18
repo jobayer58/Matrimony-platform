@@ -38,10 +38,6 @@ const MyContactRequest = () => {
                                         <td className="px-4 py-2">#{req.serialNumber}</td>
                                         <td className="px-4 py-2">{req.name}</td>
                                         <td className="px-4 py-2">
-                                            {/* <div>
-                                                <p className="text-sm text-gray-700 "><strong>Email:</strong> {req.contactEmail}</p>
-                                                <p className="text-sm text-gray-700"><strong>Phone:</strong> {req.mobileNumber}</p>
-                                            </div> */}
                                             {req.status === "Approved" ? (
                                                 <div>
                                                     <p className="text-sm text-gray-700"><strong>Email:</strong> {req.contactEmail}</p>

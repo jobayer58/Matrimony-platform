@@ -10,7 +10,7 @@ const PremiumBioData = () => {
     const { data: premiumBiodatas = [], isLoading } = useQuery({
         queryKey: ['premiumBiodatas'],
         queryFn: async () => {
-            const res = await axios.get('http://localhost:5000/premiumBiodatas');
+            const res = await axios.get('https://matrimony-server-mu.vercel.app/premiumBiodatas');
             return res.data;
         },
     });

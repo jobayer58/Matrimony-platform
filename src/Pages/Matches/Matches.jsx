@@ -15,7 +15,7 @@ const Matches = () => {
     });
 
     useEffect(() => {
-        fetch('http://localhost:5000/matchesBio')
+        fetch('https://matrimony-server-mu.vercel.app/matchesBio')
             .then(res => res.json())
             .then(data => {
                 setBioData(data);

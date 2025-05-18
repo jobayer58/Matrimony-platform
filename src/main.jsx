@@ -32,6 +32,8 @@ import MyContactRequest from './Pages/DashboardPage/DashboardUser/MyContactReque
 import AdminHome from './Pages/DashboardPage/DashboardAdmin/AdminHome.jsx';
 import ApprovedPremium from './Pages/DashboardPage/DashboardAdmin/ApprovedPremium.jsx';
 import ApprovedContactRequest from './Pages/DashboardPage/DashboardAdmin/ApprovedContactRequest.jsx';
+import GotMarried from './Pages/DashboardPage/DashboardUser/GotMarried.jsx';
+import SuccessStory from './Pages/DashboardPage/DashboardAdmin/SuccessStory.jsx';
 
 const queryClient = new QueryClient()
 
@@ -52,12 +54,12 @@ const router = createBrowserRouter([
       {
         path: '/matches/:id',
         element: <PrivateRoute><MatchesDetails></MatchesDetails></PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/matchesBio/${params.id}`)
+        loader: ({ params }) => fetch(`https://matrimony-server-mu.vercel.app/matchesBio/${params.id}`)
       },
       {
         path: '/requestContact/:id',
         element: <ContactRequest></ContactRequest>,
-        loader: ({ params }) => fetch(`http://localhost:5000/matchesBio/${params.id}`)
+        loader: ({ params }) => fetch(`https://matrimony-server-mu.vercel.app/matchesBio/${params.id}`)
       },
       {
         path: '/about',
@@ -100,7 +102,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard/gotMarried',
-        element: <p>gotMarried</p>
+        element: <GotMarried></GotMarried>
       },
       // admin Routes
 
@@ -122,7 +124,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard/successStory',
-        element: <p>successStory</p>
+        element: <SuccessStory></SuccessStory>
       },
     ]
   }
