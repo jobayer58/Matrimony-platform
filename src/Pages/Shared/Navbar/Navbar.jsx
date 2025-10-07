@@ -29,12 +29,12 @@ const Navbar = () => {
             isActive ? "text-pink-700 font-semibold" : "text-pink-400"
         }>Contact</NavLink>
         {
-            user && isAdmin && <NavLink to='/dashboard/admin' className={({ isActive }) =>
+              isAdmin && <NavLink to='/dashboard/admin' className={({ isActive }) =>
                 isActive ? "text-pink-700 font-semibold" : "text-pink-400"
             }>Dashboard</NavLink>
         }
         {
-            user && !isAdmin && <NavLink to='/dashboard/viewBioData' className={({ isActive }) =>
+             !isAdmin && <NavLink to='/dashboard/viewBioData' className={({ isActive }) =>
                 isActive ? "text-pink-700 font-semibold" : "text-pink-400"
             }>Dashboard</NavLink>
         }
